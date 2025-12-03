@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul id="fruits">
+        <li>Banana</li>
+        <li>Apple</li>
+    </ul>
+
+    <script>
+        document.getElementById('fruits').addEventListener('click',(e)=>{
+            if(e.target.tagName == 'LI'){
+                alert(`you clicked ${e.target.innerText}`)
+            }
+        })
+    </script>
+</body>
+</html>

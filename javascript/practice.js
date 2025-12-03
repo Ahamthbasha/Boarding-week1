@@ -1,4 +1,4 @@
-//destructuring
+// destructuring
 
 
 // const user = { name: "John", age: 25 };
@@ -66,7 +66,7 @@
 // console.log(name, role);
 
 
-//new learning
+// new learning
 
 // destructuring means just extracting values from objects or arrays assign it to the variable. It does not over write the original object or array. In case some object property is undefined then only default value will be used
 
@@ -106,9 +106,9 @@
 // console.log(mode, s);
 // console.log(settings.mode)
 
-//methods
+// methods
 
-//normal
+// normal
 // const calculator ={
 //     add:function(a,b){
 //         return a+b
@@ -153,19 +153,19 @@
 // console.log(emailRegex.test(email))
 
 
-//regex practical
+// regex practical
 
 // console.log("banana".match(/a/));
 // console.log("banana".match(/a/g));
 
-//2.write a regex to find all vowels in a string
+// 2.write a regex to find all vowels in a string
 
 // const name = "ahamathbasha AAradi Kaathue"
 // const vowelRegex = /[aeiouAEIOU]/g
 
 // console.log(name.match(vowelRegex))
 
-//what is the difference between /a/ and /a/g in regex?
+// what is the difference between /a/ and /a/g in regex?
 // console.log(/a/.test("JavaScript"));
 // console.log(/a/g.test("JavaScript"));
 
@@ -241,3 +241,723 @@
 
 // console.log(str1.match(regEx1))
 // console.log(str2.match(regEx2))
+
+// const numObj = new Number()
+// console.log(numObj)
+// console.log(numObj.valueOf())
+
+// const checkValueOf = {
+//     a:10,
+//     b:20,
+//     valueOf:function(){
+//         return this.a + this.b
+//     }
+// }
+
+// console.log(checkValueOf.valueOf())
+
+
+
+// let arr = [1,2,3,4,5,6,7,8,9,10]
+
+// arr.copyWithin(0,5)
+
+// console.log(arr);
+
+// pure function
+
+// function add(a,b){
+//     return a+b
+// }
+
+// //impure function
+
+// function add2(a,b){
+//     console.log(a+b)
+//     return a+b
+// }
+
+// function sayHi1(args1){
+//     console.log("hi "+ this.name + args1)
+// }
+
+// const person = { name: "Alice" }
+
+// sayHi1.call(person,", welcome to the team!")
+
+// function sayHi2(...args){
+//     console.log(`hi ${this.name} ${args}`)
+// }
+
+// sayHi2.apply(person,["!"," How are you?"])  
+
+
+// function sayHi(){
+//     console.log(`hi ${this.name}`)
+// }
+// setTimeout(sayHi.bind(person),100)
+
+
+// let target = {}
+// let source = { a: 1, b: 2 }
+// Object.assign(target,source)
+// console.log(target)
+
+
+// closure
+
+// function counter(){
+//     let count = 0
+//     return function(){
+//         count++
+//         return count
+//     }
+// }
+
+// console.log(counter()())
+// console.log(counter()())
+// console.log(counter()())
+// console.log(counter()())
+
+// let makeCounter = counter()
+
+// console.log(makeCounter())
+// console.log(makeCounter())
+// console.log(makeCounter())
+// console.log(makeCounter())
+
+// generator function
+
+// function* generateAlternateNo(){
+//     let num = 100
+//     while(num != 0){
+//         yield num
+//         num -= 2
+//     }
+// }
+
+// const generate = generateAlternateNo()
+
+// for(let  i=1;i<=50;i++){
+//     if(i % 2 != 0){
+//         console.log(generate.next().value)
+//     }else{
+//         generate.next()
+//     }
+// }
+
+// currying 
+
+// function multiply(a){
+//     return function(b){
+//         return function(c){
+//             return a * b * c
+//         }
+//     }   
+// }
+
+// const result = multiply(2)(1)(5)
+
+// console.log(result)
+
+// callback 
+
+// function take(fn){
+//     setTimeout(()=>{
+//         let a = 10
+//         let b = 20
+//         fn(a,b)
+//     })
+// }
+
+// take((a,b)=>{
+//     console.log(a+b)
+// })
+
+
+// callback hell
+
+// function take(fn){
+//     setTimeout(()=>{
+//         let a = 10
+//         let b = 20
+//         fn(a,b)
+//     })
+// }
+
+// function double(a,b,fn){
+//     setTimeout(()=>{
+//         let aDouble = a*a
+//         let bDouble = b*b
+//         fn(aDouble*bDouble)
+//     })
+// }
+
+// function squareOfDouble(result,fn){
+//     setTimeout(()=>{
+//         let square = result * result
+//         fn(square)
+//     })
+// }
+
+// take((a,b)=>{
+//     console.log("values of the variable we get",a+b)
+//     double(a,b,(result)=>{
+//         console.log("result",result)
+//         squareOfDouble(result,(squareOfResult)=>{
+//             console.log("square of Double",squareOfResult)
+//         })
+//     })
+// })
+
+// promise and types
+
+// let promise1 = new Promise((resolve,reject)=>{
+//     setTimeout(()=>{
+//         let data = 10
+//         if(data){
+//             resolve(data)
+//         }else{
+//             reject(data)
+//         }
+//     },1000)
+// })
+
+
+// let promise2 = new Promise((resolve,reject)=>{
+//     setTimeout(()=>{
+//         let data
+//         if(data){
+//             resolve(data)
+//         }else{
+//             reject(data)
+//         }
+//     },500)
+// })
+
+
+// Promise.race([promise1,promise2])
+// .then((resolve)=>{
+//     console.log("success result",resolve)
+// })
+// .catch((reject)=>{
+//     console.log("rejected result",reject)
+// })
+
+// Promise.any([promise1,promise2])
+// .then((resolve)=>{
+//     console.log("success result",resolve)
+// })
+// .catch((reject)=>{
+//     console.log("rejected result",reject)
+// })
+
+// Promise.all([promise1,promise2])
+// .then((resolve)=>{
+//     console.log("promise all success result",resolve)
+// })
+// .catch((reject)=>{
+//     console.log("promise all rejected result",reject)
+// })
+
+// Promise.allSettled([promise1,promise2])
+// .then((resolve)=>{
+//     console.log("promise all success result",resolve)
+// })
+
+// let pomise = new Promise((resolve,reject)=>{
+//     setTimeout(()=>{
+//         let data = 10
+//         if(data){
+//             resolve(data)
+//         }else{
+//             reject(data)
+//         }
+//     })
+// })
+// pomise.then((result)=>{
+//     console.log("success",result)
+// })
+// .catch((error)=>{
+//     console.log("error",error)
+// })
+// .finally(()=>{
+//     console.log("cleanup activity")
+// })  
+
+// async await
+
+// function promise() {
+//     return new Promise((resolve, reject) => {
+//         setTimeout(() => {
+//             let data = "success"
+//             if (data) {
+//                 resolve(data)
+//             } else {
+//                 reject(data)
+//             }
+//         })
+//     })
+// }
+
+// async function callPromise(){
+//     try{
+//         const response = await promise()
+//         console.log(response)
+//     }catch(error){
+//         console.log(error)
+//     }
+// }
+// callPromise()
+
+//copy
+
+// let obj = {a:10,b:20,c:{d:30,e:40}}
+
+// let shallowCopy = {...obj}
+
+// console.log(shallowCopy)
+
+
+// function deepCopy(obj){
+//     if(obj == null || typeof obj != "object"){
+//         return obj
+//     }
+    
+//     const copy = Array.isArray(obj) ? [] : {}
+    
+//     for(let key in obj){
+//         copy[key] = deepCopy(obj[key])
+//     }
+    
+//     return copy
+// }
+
+
+// const alterNateDeepCopy = JSON.parse(JSON.stringify(obj))
+
+// const alterNateDeepCopy2 = structuredClone(obj)
+
+//class and inheritance
+// class Math{
+//     add(n1,n2){
+//         return n1+n2
+//     }
+// }
+
+// class ExtraMath extends Math{
+//     mul(n1,n2){
+//         return n1 * n2
+//     }
+// }
+
+// const operation = new ExtraMath()
+
+// console.log(operation.mul(10,20))
+
+//constructor function
+
+// function createObj(name){
+//     this.name = name
+// }
+
+// const person = new createObj("basha")
+// console.log(person)
+
+
+//super keyword
+
+// class Animal{
+//     constructor(name){
+//         this.name = name
+//     }
+    
+//     speak(){
+//         console.log("all animal makes a sound")
+//     }
+// }
+
+// class Dog extends Animal{
+//     constructor(name){
+//         super(name)
+//     }
+//     speak(){
+//     super.speak()
+//     }
+// }
+
+// const puppy = new Dog("puppy")
+
+// puppy.speak()
+
+//Object.create
+
+// let obj = {
+//     name:"ahamathbasha",
+//     speak:function(){
+//         console.log('i love you')
+//     }
+// }
+
+// let obj2 = Object.create(obj)
+
+// obj2.speak()
+
+// //object.defineProperty
+// let obj3 = {}
+
+// Object.defineProperty(obj3,'name',{
+//     value : "basha",
+//     writable : false,
+//     enumerable : true
+// })
+
+// console.log(obj3)
+
+// //object.getOwnPropertyDescriptor
+
+// const descriptor = Object.getOwnPropertyDescriptor(obj3,'name')
+// console.log(descriptor)
+
+// //Object.getPrototypeOf
+
+// let obj4 = {
+//     name:"basha",
+//     speak:function(){
+//         console.log("basha ji")
+//     }
+// }
+
+// const obj5 = Object.create(obj4)
+
+// console.log(obj4 === Object.getPrototypeOf(obj5))
+
+// //Object.keys
+
+// const keys = Object.keys(obj4)
+
+// //Object.values
+
+// const values = Object.values(obj4)
+
+// //Object.entries
+
+// const entries = Object.entries(obj4)
+
+// //Object.seal
+
+// const objSeal = Object.seal(obj4)
+
+// const objFreeze = Object.freeze(obj4)
+
+// const isFrozen = Object.isFrozen(objFreeze)
+
+
+// Object.preventExtensions(obj4)
+
+// const object = {
+//     firstName : "Arjun",
+//     lastName : "Sarkar",
+//     set fullName(name){
+//         let [firstName,secondName] = name.split(" ")
+//         this.firstName = firstName
+//         this.lastName = secondName
+//     },
+//     get fullName(){
+//         return `${this.firstName} ${this.lastName}`
+//     }
+// }
+
+// console.log(object.fullName)
+
+// object.fullName = "Ahamathbasha F"
+
+// console.log(object.fullName)
+
+// class MathUtils{
+//     static add(a,b){
+//         return a + b
+//     }
+// }
+
+// const result = MathUtils.add(10,20)
+// console.log(result)
+
+
+// function data(name){
+//     this.name = name
+// }
+
+// const person = new data("basha")
+// console.log(person.name)
+
+//prototype
+
+// function calculator(){}
+
+// calculator.prototype.add = function(a,b){
+//     return a+b
+// }
+
+// const addOperation =new calculator()
+
+// console.log(addOperation.add(5,4))
+
+// //prototype chaining
+
+// function calculator(){}
+
+// calculator.prototype.add = function(a,b){
+//     return a + b
+// }
+
+// function scientificCalculator(){
+//     calculator.call(this)
+// }
+
+// scientificCalculator.prototype = Object.create(calculator.prototype)
+
+// scientificCalculator.prototype.mul = function(a,b){
+//     return a * b
+// }
+
+// const mathsOperation = new scientificCalculator()
+// console.log(mathsOperation.mul(10,20))
+// console.log(mathsOperation.add(20,10))
+
+//prototype inheritance
+
+// const parent = {
+//     greet:function(){
+//         console.log("hello parent")
+//     }
+// }
+
+// const child = {
+//     __proto__ : parent,
+//     sayHi:function(){
+//         console.log("hi")
+//     }
+// }
+
+// child.sayHi()
+
+//proxy object
+
+// const obj = {
+//     name:"ahamathbasha",
+//     age:30
+// }
+
+// const handler = {
+//     get(target,props){
+//         if(props in target){
+//             return target[props] 
+//         }
+//     },
+    
+//     set(target,props,value){
+//         if(props in target){
+//             target[props] = value
+//         }
+//     }
+// }
+
+// const proxy = new Proxy(obj,handler)
+
+// console.log(proxy)
+
+// console.log(proxy.name)
+
+// proxy.name = "arjun sarkar"
+
+// console.log(proxy)
+
+// console.log(obj)
+
+//encapsulation
+
+// class BankAccount{
+//     #balance
+    
+//     constructor(balance){
+//         this.#balance = balance
+//     }
+    
+//     deposit(balance){
+//         this.#balance += balance
+//     }
+    
+//     debit(balance){
+//         if(this.#balance > 0){
+//             this.#balance -= balance
+//         }else{
+//             return 'minimum balance not met'
+//         }
+//     }
+    
+//     get(){
+//         return this.#balance
+//     }
+// }
+
+// const acc = new BankAccount(1000);
+// acc.deposit(500);
+
+// console.log(acc.get()); 
+
+//inheritance
+
+// class Math{
+//     add(a,b){
+//         return a+b
+//     }
+// }
+
+// class ExtraMath extends Math{
+//     mul(a,b){
+//         return a * b
+//     }
+// }
+
+// const ops = new ExtraMath()
+// console.log(ops.mul(4,4))
+
+//multiple inheritance using mixins
+
+// const canSwim = {
+//     swim:function(){
+//         console.log("swim")
+//     }
+// }
+
+// class Animal{
+//     constructor(name){
+//         this.name = name
+//     }
+// }
+
+// class Dog extends Animal{}
+
+// Object.assign(Dog.prototype,canSwim)
+
+// const dog = new Dog()
+
+// dog.swim()
+
+//polymorphism runtime polymorphism method overriding
+
+// class Animal{
+//     constructor(name){
+//         this.name = name
+//     }
+    
+//     speak(){
+//         console.log("animal can speak")
+//     }
+// }
+
+// class Dog extends Animal{
+//     constructor(name){
+//         super(name)
+//     }
+    
+//     speak(){
+//         console.log("bark")
+//     }
+// }
+
+// const dog = new Dog("puppy")
+
+// dog.speak()
+
+//method overloading
+
+// class Math{
+//     add(a,b,c){
+//         if(c != undefined){
+//             return a + b + c
+//         }
+//         if(b != undefined){ 
+//             return a + b
+//         }
+
+//         return a
+//     }
+// }
+
+
+// const operation = new Math()
+
+// console.log(operation.add(10,30))
+
+//abstraction
+
+// class Car{
+//     #startEngine = false
+
+//     start(){
+//         this.#startEngine = true
+//         console.log("engine started")
+//     }
+
+//     stop(){
+//         this.#startEngine = false
+//         console.log("engine stopped")
+//     }
+
+//     drive(){
+//         if(this.#startEngine){
+//             console.log("car is driving")
+//         }else{
+//             console.log("start the engine first")
+//         }
+//     }
+// }
+
+// const myCar = new Car()
+
+// myCar.start()
+
+//memoization
+
+// function factorial(n){
+//     let fact = 1
+//     for(let i=1;i<=n;i++){
+//         fact *= i
+//     }
+//     return fact
+// }
+
+// const memoization = (fn)=>{
+//     let cache = {}
+//     return function(args){
+//         let input = args
+//         if(input in cache){
+//             return cache[input]
+//         }else{
+//             let result = fn(input)
+//             cache[input] = result
+//             return result
+//         }
+//     }
+// }
+
+// const factMemoization = memoization(factorial)
+// console.log(factMemoization(5))
+
+//deep freeze
+
+// function deepFreeze(obj){
+//     let propNames = Object.getOwnPropertyNames(obj)
+    
+//     for(let name of propNames){
+//         const value = obj[name]
+//         if(value && typeof value == "object"){
+//             deepFreeze(value)
+//         }
+//     }
+    
+//     return Object.freeze(obj)
+// }
+
