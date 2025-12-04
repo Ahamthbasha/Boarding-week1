@@ -391,7 +391,7 @@
 //   { user: 'Vijay', amount: 700, date: '2025-03-12' },
 // ];
 
-//output
+// output
 // {
 //   '2025-01': { topSpender: 'Meera' },
 //   '2025-02': { topSpender: 'Vijay' },
@@ -551,3 +551,16 @@
 // }
 
 // console.log(mergeArray(array))
+
+// function counter() {
+//   let count = 0;
+//   return function() {
+//     return ++count;
+//   };
+// }
+
+// const c1 = counter();
+// console.log(c1());
+// console.log(c1());
+// const c2 = counter();
+// console.log(c2());
