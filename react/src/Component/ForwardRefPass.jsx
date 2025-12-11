@@ -1,3 +1,6 @@
+// se forwardRef ONLY when:
+// ⚡ You want parent to attach a ref directly to a DOM element inside child,
+
 import React, { forwardRef, useRef } from 'react'
 
 const ChildComponent = forwardRef((props,ref) => {
