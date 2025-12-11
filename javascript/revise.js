@@ -23,6 +23,7 @@
 //     var b =30
 // }
 
+//normal function denotes the current object
 
 // const person = {
 //   name: "Basha",
@@ -33,6 +34,7 @@
 
 // setTimeout(person.greet.bind(person), 1000);
 
+//arrow function if you try to bind this that time also it get this context from global right
 
 // const obj = {
 //     name: 'Charlie',

@@ -169,6 +169,26 @@ const transactions = [
 
 // Group transactions by month
 
+//output format
+
+// {
+//   '2025-01': [
+//     { user: 'Rahul', amount: 300, date: '2025-01-20' },
+//     { user: 'Rahul', amount: 400, date: '2025-01-29' },
+//     { user: 'Meera', amount: 1500, date: '2025-01-20' }
+//   ],
+//   '2025-02': [
+//     { user: 'Meera', amount: 350, date: '2025-02-10' },
+//     { user: 'Vijay', amount: 1600, date: '2025-02-14' },
+//     { user: 'Rahul', amount: 200, date: '2025-02-25' }
+//   ],
+//   '2025-03': [
+//     { user: 'Rahul', amount: 2000, date: '2025-03-14' },
+//     { user: 'Meera', amount: 500, date: '2025-03-15' },
+//     { user: 'Vijay', amount: 700, date: '2025-03-12' }
+//   ]
+// }
+
 // let result = {}
 
 // for(let val of transactions){
@@ -183,6 +203,14 @@ const transactions = [
 // console.log(result)
 
 // Find the highest entire transaction per month
+
+//output format
+
+// {
+//   '2025-01': { user: 'Meera', amount: 1500 },
+//   '2025-02': { user: 'Vijay', amount: 1600 },
+//   '2025-03': { user: 'Rahul', amount: 2000 }
+// }
 
 // let result = {}
 
@@ -221,6 +249,15 @@ const transactions = [
 // console.log(final)
 
 //find the highest single transaction
+
+//output format
+
+// {
+//   '2025-01': { user: 'Meera', amount: 1500, date: '2025-01-20' },
+//   '2025-02': { user: 'Vijay', amount: 1600, date: '2025-02-14' },
+//   '2025-03': { user: 'Rahul', amount: 2000, date: '2025-03-14' }
+// }
+
 // let result = {}
 // for(let val of transactions){
 //     let month = val.date.slice(0,7)
@@ -231,57 +268,95 @@ const transactions = [
 // }
 // console.log(result)
 
-//count no of transactions done by each user
+//count no of transactions done by each user per month
+
+// {
+//   '2025-01': { Rahul: 2, Meera: 1 },
+//   '2025-02': { Meera: 1, Vijay: 1, Rahul: 1 },
+//   '2025-03': { Rahul: 1, Meera: 1, Vijay: 1 }
+// }
 
 // let result = {}
+
 // for(let val of transactions){
 //     let month = val.date.slice(0,7)
-//     if(!result[month]){
-//         result[month] = [val]
+//     if(result[month]){
+//         let user = val.user
+//         if(!result[month][user]){
+//             result[month][user]=1
+//         }else{
+//             result[month][user]++
+//         }
+
 //     }else{
+//         let user = val.user
+//         result[month] = {}  
+//         result[month][user] = 1
+
+//     }
+// }
+
+// console.log(result)
+
+//find average spending per user per month
+
+//output format
+
+// {
+//   '2025-01': [
+//     { user: 'Rahul', avgAmount: 350 },
+//     { user: 'Meera', avgAmount: 1500 }
+//   ],
+//   '2025-02': [
+//     { user: 'Meera', avgAmount: 350 },
+//     { user: 'Vijay', avgAmount: 1600 },
+//     { user: 'Rahul', avgAmount: 200 }
+//   ],
+//   '2025-03': [
+//     { user: 'Rahul', avgAmount: 2000 },
+//     { user: 'Meera', avgAmount: 500 },
+//     { user: 'Vijay', avgAmount: 700 }
+//   ]
+// }
+
+// let result = {}
+
+// for(let val of transactions){
+//     let month = val.date.slice(0,7)
+//     if(result[month]){
 //         result[month].push(val)
+//     }else{
+//         result[month] = [val]
 //     }
 // }
 
 // let final = {}
 
 // for(let key in result){
-//     let take = result[key]
-//     let map = {}
-
-//     for(let val of take){
-//         if(map[val.user]){
-//             map[val.user]++
+//     let month = key
+//     let takeAmount = {}
+//     let takeCount = {}
+//     for(let val of result[key]){
+//         if(takeAmount[val.user]){
+//             takeAmount[val.user] += val.amount
+//             takeCount[val.user]++
 //         }else{
-//             map[val.user] = 1
+//             takeAmount[val.user] = val.amount
+//             takeCount[val.user] = 1
 //         }
 //     }
 
-//     final[key] = map
+//     for(let key in takeAmount){
+//         let amount = takeAmount[key]
+//         let count = takeCount[key]
+
+//         let averageSpendingAmount = Math.floor(amount/count)
+
+//         if(final[month]){
+//             final[month].push({user:key,avgAmount:averageSpendingAmount})
+//         }else{
+//             final[month] = [{user:key,avgAmount:averageSpendingAmount}]
+//         }
+//     }
 // }
-
 // console.log(final)
-
-//alternate or simple version
-
-// let result = transactions.reduce((acc,cur)=>{
-//     let month = cur.date.slice(0,7)
-//     acc[month] = acc[month] || {}
-//     acc[month][cur.user] = (acc[month][cur.user]||0)+1
-//     return acc
-// },{})
-
-// console.log(result)
-
-//find average spending per user per month
-
-let result = transactions.reduce((acc,cur)=>{
-    let month = cur.date.slice(0,7)
-    acc[month] = acc[month] || {}
-    let count = (acc[month][cur.user] || 0) + 1
-    console.log(count)
-    acc[month][cur.user] = acc[month][cur.user]+Math.floor((acc.amount||0+cur.amount)/count)
-    return acc
-},{})
-
-console.log(result)
