@@ -144,53 +144,39 @@
 // linked list stack
 
 // class Node{
-//     constructor(value){
-//         this.value = value
-//         this.next = null
+//     constructor(val){
+//         this.value = val
+//         this.next = null 
 //     }
 // }
 
-// class StackLinkedList{
+// class StackLL{
 //     constructor(){
 //         this.head = null
 //         this.size = 0
 //     }
 
 //     isEmpty(){
-//         return this.head == null
+//         return this.size == 0
+//     }
+
+//     getSize(){
+//         return this.size
 //     }
 
 //     push(val){
 //         const node = new Node(val)
-//         if(this.isEmpty()){
-//             this.head = node
-//         }else{
-//           let temp = this.head
-//           while(temp.next){
-//             temp = temp.next
-//           }
-//           temp.next = node
-//         }
+//         node.next = this.head
+//         this.head = node
 //         this.size++
 //     }
 
 //     pop(){
 //         if(this.isEmpty()){
 //             return null
-//         }
-//         else if(this.size == 1){
+//         }else{
 //             let val = this.head.value
-//             this.head = null
-//             this.size--
-//             return val
-//         }
-//         else{
-//             let temp = this.head
-//             while(temp.next.next){
-//                 temp = temp.next
-//             }
-//             let val = temp.next.value
-//             temp.next = temp.next.next
+//             this.head = this.head.value
 //             this.size--
 //             return val
 //         }
@@ -199,25 +185,18 @@
 //     peek(){
 //         if(this.isEmpty()){
 //             return null
-//         }
-//         else{
-//             let temp = this.head
-
-//             while(temp.next){
-//                 temp = temp.next
-//             }
-
-//             return temp.value
+//         }else{
+//             return this.head.value
 //         }
 //     }
 
-
 //     display(){
 //         if(this.isEmpty()){
-//             return 'list is empty'
+//             return 'stack is empty'
 //         }
 //         else{
 //             let temp = this.head
+
 //             let list = ''
 
 //             while(temp){
@@ -229,9 +208,6 @@
 
 //             return list
 //         }
-//     }
-//     getSize(){
-//         return this.size
 //     }
 // }
 
@@ -446,7 +422,6 @@
 
 let input = "333 3 * 222 2 * + 90 -"
 
-
 let arr = input.split(" ")
 
 let stack = []
@@ -510,7 +485,7 @@ class Queue{
     }
 
     size(){
-        this.items.length
+       return this.items.length
     }
 }
 
@@ -535,7 +510,7 @@ class StackBasedQueue{
         if(this.isEmpty()){
             return null
         }else{
-            this.queue.pop()
+            this.queue.dequeue()
         }
     }
 
@@ -543,7 +518,7 @@ class StackBasedQueue{
         if(this.isEmpty()){
             return null
         }else{
-            this.queue.peek()
+            return this.queue.peek()
         }
     }
 }

@@ -258,26 +258,173 @@
 
 // Input: [2,0,2,1,1,0]
 
-let arr = [2,0,2,1,1,0]
+// let arr = [2,0,2,1,1,0]
 
 
-let low = 0
-let mid = 0
-let high = arr.length - 1
+// let low = 0
+// let mid = 0
+// let high = arr.length - 1
 
-while(mid <= high){
-    if(arr[mid] == 0){
-        [arr[low],arr[mid]] = [arr[mid],arr[low]]
-        low++
-        mid++
+// while(mid <= high){
+//     if(arr[mid] == 0){
+//         [arr[low],arr[mid]] = [arr[mid],arr[low]]
+//         low++
+//         mid++
+//     }
+//     else if(arr[mid] == 1){
+//         mid++
+//     }
+//     else{
+//         [arr[mid],arr[high]] = [arr[high],arr[mid]]
+//         high--
+//     }
+// }
+
+// console.log(arr)
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+class Stack{
+    constructor(){
+        this.items = []
     }
-    else if(arr[mid] == 1){
-        mid++
+
+    isEmpty(){
+        return this.items.length == 0
     }
-    else{
-        [arr[mid],arr[high]] = [arr[high],arr[mid]]
-        high--
+
+    push(val){
+        this.items.push(val)
+    }
+
+    pop(){
+        if(this.isEmpty()){
+            return null
+        }
+        else{
+            return this.items.pop()
+        }
+    }
+    peek(){
+        if(this.isEmpty()){
+            return null
+        }
+        else{
+            return this.items[this.items.length-1]
+        }
+    }
+
+    display(){
+        return this.items
+    }
+
+    getSize(){
+        return this.items.length
+    }
+
+    reverseArr(arr){
+        let s = new Stack()
+
+        for(let val of arr){
+            s.push(val)
+        }
+
+        let reversedArr = []
+
+        while(s.items.length){
+            reversedArr.push(s.pop())
+        }
+
+        return reversedArr
+    }
+
+
+    reverseStr(str){
+        let s = new Stack()
+
+        for(let val of str){
+            s.push(val)
+        }
+
+        let reversedStr = ''
+
+        while(s.items.length){
+            reversedStr += s.pop()
+        }
+
+        return reversedStr
     }
 }
 
-console.log(arr)
+
+class ObjStack{
+    constructor(){
+        this.items = {}
+        this.top = 0
+    }
+
+    isEmpty(){
+        return this.top == 0
+    }
+
+    push(val){
+        this.items[this.top] = val
+        this.top++
+    }
+
+    pop(){
+        if(this.isEmpty()){
+            return null
+        }else{
+            let val = this.items[this.top-1]
+            delete this.items[this.top-1]
+            this.top--
+            return val
+        }
+    }
+
+    peek(){
+        if(this.isEmpty()){
+            return null
+        }else{
+            let val = this.items[this.top-1]
+            return val
+        }
+    }
+
+    diplay(){
+        return Object.values(this.items)
+    }
+
+    getSize(){
+        return this.top
+    }
+}
+
+class Node{
+    constructor(val){
+        this.val = val
+        this.next = null
+    }
+}
+class StackLL{
+    constructor(){
+        this.head = null
+        this.size = 0
+    }
+
+    isEmpty(){
+        return this.size == 0
+    }
+
+    push(val){
+        const node = new Node(val)
+        if(this.isEmpty()){
+            this.head = node
+        }else{
+            this.head.next = node
+            this.head = node
+        }
+        this.size++
+    }
+}
