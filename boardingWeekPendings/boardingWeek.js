@@ -439,16 +439,16 @@
 
 //sum of a digit
 
-let n = 1001
+// let n = 1001
 
-function sumOfDigits(n){
-    if(n <= 0){
-        return n
-    }
-    return (n % 10) + sumOfDigits(Math.floor(n/10))
-}
+// function sumOfDigits(n){
+//     if(n <= 0){
+//         return n
+//     }
+//     return (n % 10) + sumOfDigits(Math.floor(n/10))
+// }
 
-console.log(sumOfDigits(n))
+// console.log(sumOfDigits(n))
 
 
 //reverse a digit
@@ -463,14 +463,206 @@ console.log(sumOfDigits(n))
 // Input:  "banana"
 // Output: "ban"
 
-let str = "banana"
-let finalStr = ''
-let seen = new Set()
-for(let val of str){
-    if(!seen.has(val)){
-        seen.add(val)
-        finalStr += val
-    }
-}
+// let str = "banana"
+// let finalStr = ''
+// let seen = new Set()
+// for(let val of str){
+//     if(!seen.has(val)){
+//         seen.add(val)
+//         finalStr += val
+//     }
+// }
 
-console.log(finalStr)
+// console.log(finalStr)
+
+//difference between two times in minutes
+
+// function diffTimeInMinute(time1,time2){
+//     let [h1,m1] = time1.split(":").map(Number)
+//     let [h2,m2] = time2.split(":").map(Number)
+
+//     const t1 = h1 * 60 + m1
+//     const t2 = h2 * 60 + m2
+
+//     return Math.abs(t2 - t1)
+// }
+
+// console.log(diffTimeInMinute("10:30", "11:15"))
+
+// count hours until new year
+
+// const now = new Date()
+
+// const nextYear = now.getFullYear() + 1
+
+// const newYear = new Date(nextYear,0,1,0,0,0)
+
+// const diffMs = newYear - now
+
+// const diffHours = Math.floor(diffMs/(1000*60*60))
+
+// console.log(diffHours)
+
+// //calculate hours,minutes,seconds,days until next year
+
+// function timeUntilNewYear(unit = "hours") {
+//     const now = new Date()
+//     const newYear = new Date(now.getFullYear() + 1, 0, 1)
+
+//     const diffMs = newYear - now
+
+//     switch (unit) {
+//         case "seconds":
+//             return Math.floor(diffMs / 1000)
+//         case "minutes":
+//             return Math.floor(diffMs / (1000 * 60))
+//         case "hours":
+//             return Math.floor(diffMs / (1000 * 60 * 60))
+//         case "days":
+//             return Math.floor(diffMs / (1000 * 60 * 60 * 24))
+//         default:
+//             return diffMs
+//     }
+// }
+
+
+//insert a node into the sorted List
+
+// class Node{
+//     constructor(val){
+//         this.value = val
+//         this.next = null
+//     }
+// }
+
+// class LinkedList{
+//     constructor(){
+//         this.head = null
+//         this.size = 0
+//     }
+
+//     isEmpty(){
+//         return this.size  == 0
+//     }
+
+//     getSize(){
+//         return this.size
+//     }
+
+//     prepend(value){
+//         const node = new Node(value)
+//         node.next = this.head
+//         this.head = node
+//         this.size++
+//     }
+
+//     append(value){
+//         const node = new Node(value)
+//         if(this.isEmpty()){
+//             this.head = node
+//         }
+//         else{
+//             let temp = this.head
+
+//             while(temp.next){
+//                 temp = temp.next
+//             }
+
+//             temp.next = node
+//         }
+//         this.size++
+//     }
+
+//     print(){
+//         if(this.isEmpty()){
+//             return null
+//         }else{
+//             let temp = this.head
+
+//             let list = ''
+
+//             while(temp){
+//                 list += temp.value + '->'
+//                 temp = temp.next
+//             }
+//             list += 'null'
+//             return list
+//         }
+//     }
+
+//     insert(index,value){
+//         const node = new Node(value)
+//         if(index < 0 || index > this.size){
+//             return null
+//         }
+//         else if(index == 0){
+//             this.prepend(value)
+//         }
+//         else if(index == this.size){
+//             this.append(value)
+//         }
+//         else{
+//             let temp = this.head
+
+//             for(let i=0;i<index-1;i++){
+//                 temp = temp.next
+//             }
+
+//             let nextNode = temp.next
+//             temp.next = node
+//             node.next = nextNode
+//             this.size++
+//         }
+//     }
+
+//     insertNodeInSortedList(node){
+//         if(!this.head || node.value < this.head.value){
+//             node.next = this.head
+//             this.head = node
+//         }else{
+//             let temp = this.head
+//             while(temp.next && temp.next.value < node.value){
+//                 temp = temp.next
+//             }
+//             node.next = temp.next
+//             temp.next = node
+//         }
+//         this.size++
+//     }
+// }
+
+// const ll = new LinkedList()
+
+// // Initial sorted list
+// ll.append(10)
+// ll.append(20)
+// ll.append(40)
+// ll.append(50)
+// ll.append(60)
+// console.log("Initial:", ll.print()) // 10->20->40->50->60->null
+
+// // Insert at head
+// ll.insert(0, 5)
+// console.log("Insert at head:", ll.print()) // 5->10->20->40->50->60->null
+
+// // Insert at tail
+// ll.insert(ll.getSize(), 70)
+// console.log("Insert at tail:", ll.print()) // 5->10->20->40->50->60->70->null
+
+// // Insert in middle
+// ll.insert(3, 25)
+// console.log("Insert in middle:", ll.print()) // 5->10->20->25->40->50->60->70->null
+
+// // Insert using sorted insert
+// ll.insertNodeInSortedList(new Node(15))
+// ll.insertNodeInSortedList(new Node(35))
+// ll.insertNodeInSortedList(new Node(75))
+// console.log("After sorted inserts:", ll.print())
+// // 5->10->15->20->25->35->40->50->60->70->75->null
+
+
+//test 
+
+// console.log(1+ +'1') //2
+// console.log('A'-1) //NaN
+// console.log(null==undefined) //true

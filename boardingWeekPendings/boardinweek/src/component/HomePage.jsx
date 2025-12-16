@@ -33,29 +33,70 @@
 
 //create two components and in child component create a input box and in parent component add a H1 tag, when you type in input box it should reflect in h1 tag in parent component
 
-import React, { useState } from 'react'
+// import React, { useState } from 'react'
 
-const ChildComponent = ({value,receivedData}) => {
-    return(
-        <div>
-            <input type="text" value={value} onChange={(e)=>receivedData(e.target.value)}/>
-        </div>
-    )
-}
+// const ChildComponent = ({value,receivedData}) => {
+//     return(
+//         <div>
+//             <input type="text" value={value} onChange={(e)=>receivedData(e.target.value)}/>
+//         </div>
+//     )
+// }
+
+// const HomePage = () => {
+//     const [data,setData] = useState('')
+
+//     const receivedData = (data)=>{
+//         setData(data)
+//     }
+//   return (
+//     <div>
+//       <ChildComponent value={data} receivedData={receivedData}/>
+//       <h1>{data}</h1>
+//     </div>
+//   )
+// }
+
+// export default HomePage
+
+// prevent rightClick and leftClick
+
+// import React from 'react'
+
+// const HomePage = () => {
+//     const rightClickDisable = (e)=>{
+//         e.preventDefault()
+//         alert("right click disabled")
+//     }
+
+//     const leftClickDisable = (e)=>{
+//         e.preventDefault()
+//         alert("left click disabled")
+//     }
+//   return (
+//     <div>
+//       <button onContextMenu={rightClickDisable}>click Right</button>
+// <hr />
+//       <button onClick={leftClickDisable}>click left</button>
+//     </div>
+//   )
+// }
+
+// export default HomePage
+
+// custom hook to implement toggle
+
+import React from 'react'
+import useToggle from '../hooks/useToggle'
 
 const HomePage = () => {
-    const [data,setData] = useState('')
-
-    const receivedData = (data)=>{
-        setData(data)
-    }
+    const {toggle,modify} = useToggle()
   return (
     <div>
-      <ChildComponent value={data} receivedData={receivedData}/>
-      <h1>{data}</h1>
+      <input type="checkbox" checked={toggle} onChange={modify}/>
+      <button onClick={modify}>Click</button>
     </div>
   )
 }
 
 export default HomePage
-
