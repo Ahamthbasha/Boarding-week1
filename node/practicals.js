@@ -594,21 +594,21 @@
 
 // block the particular header request
 
-import express from 'express'
-const app = express()
+// import express from 'express'
+// const app = express()
 
-app.use((req,res,next)=>{
-    if(req.headers.hello == "basha"){
-        res.status(403).json({message:"this header is blocked"})
-    }else{
-        next()
-    }
-})
+// app.use((req,res,next)=>{
+//     if(req.headers.hello == "basha"){
+//         res.status(403).json({message:"this header is blocked"})
+//     }else{
+//         next()
+//     }
+// })
 
-app.get("/home",(req,res)=>{
-    res.send("home page")
-})
+// app.get("/home",(req,res)=>{
+//     res.send("home page")
+// })
 
-app.listen(3000,()=>{
-    console.log("server is running")
-})
+// app.listen(3000,()=>{
+//     console.log("server is running")
+// })
