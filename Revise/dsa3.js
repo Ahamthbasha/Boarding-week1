@@ -1,0 +1,843 @@
+//tree
+
+class Node{
+    constructor(value){
+        this.value = value
+        this.left = null
+        this.right = null
+    }
+}
+
+class Bst{
+    constructor(){
+        this.root = null
+    }
+
+    isEmpty(){
+        return this.root == null
+    }
+
+    insert(value){
+        const node = new Node(value)
+        if(this.isEmpty()){
+            this.root = node
+        }else{
+            this.insertNode(this.root,node)
+        }
+    }
+
+    insertNode(root,node){
+        if(node.value < root.value){
+            if(root.left == null){
+                root.left = node
+            }else{
+                this.insertNode(root.left,node)
+            }
+        }else{
+            if(root.right == null){
+                root.right = node
+            }else{
+                this.insertNode(root.right,node)
+            }
+        }
+    }
+
+    search(root,value){
+        if(!root){
+            return false
+        }
+        else if(value == root.value){
+            return true
+        }
+        else if(value < root.value){
+            return this.search(root.left,value)
+        }
+        else{
+            return this.search(root.right,value)
+        }
+    }
+
+    preOrder(root){
+        if(root){
+            console.log(root.value)
+            this.preOrder(root.left)
+            this.preOrder(root.right)
+        }
+    }
+
+    inOrder(root){
+        if(root){
+            this.inOrder(root.left)
+            console.log(root.value)
+            this.inOrder(root.right)
+        }
+    }
+
+    postOrder(root){
+        if(root){
+            this.postOrder(root.left)
+            this.postOrder(root.right)
+            console.log(root.value)
+        }
+    }
+
+    levelOrder(root){
+        let queue = []
+        queue.push(root)
+
+        while(queue.length){
+            let cur = queue.shift()
+
+            console.log(cur.value)
+
+            if(cur.left){
+                queue.push(cur.left)
+            }
+
+            if(cur.right){
+                queue.push(cur.right)
+            }
+        }
+    }
+
+    min(root){
+        if(!root){
+            return null
+        }
+
+        while(root.left){
+            root = root.left
+        }
+
+        return root.value
+    }
+
+    max(root){
+        if(!root){
+            return null
+        }
+
+        while(root.right){
+            root = root.right
+        }
+
+        return root.value
+    }
+
+    minNode(root){
+        if(!root.left){
+            return root.value
+        }
+
+        return this.minNode(root.left)
+    }
+
+    maxNode(root){
+        if(!root.right){
+            return root.value
+        }
+
+        return this.maxNode(root.right)
+    }
+
+    delete(value){
+        this.root = this.deleteNode(this.root,value)
+    }
+
+    deleteNode(root,value){
+        if(!root){
+            return null
+        }
+
+        if(value < root.value){
+            root.left = this.deleteNode(root.left,value)
+        }
+        else if(value > root.value){
+            root.right = this.deleteNode(root.right,value)
+        }
+        else{
+            if(!root.left && !root.right){
+                return null
+            }
+
+            if(!root.left){
+                return root.right
+            }
+
+            if(!root.right){
+                return root.left
+            }
+
+            root.value = this.min(root.right)
+            root.right = this.deleteNode(root.right,root.value)
+        }
+        return root
+    }
+
+    isPrime(val){
+        if(val <= 1){
+            return false
+        }
+
+        for(let i=2;i<=Math.sqrt(val);i++){
+            if(val % i ==0){
+                return false
+            }
+        }
+
+        return true
+    }
+
+    findPrimes(root,result=[]){
+        if(root){
+            this.findPrimes(root.left,result)
+            if(this.isPrime(root.value)){
+                result.push(root.value)
+            }
+            this.findPrimes(root.right,result)
+        }
+
+        return result
+    }
+
+    isBst(root,min=-Infinity,max=Infinity){
+        if(!root){
+            return true
+        }
+
+        if(root.value <= min || root.value >= max){
+            return false
+        }
+
+        return this.isBst(root.left,min,root.value) && this.isBst(root.right,root.value,max)
+    }
+
+    isIdentical(tree1,tree2){
+        if(!tree1 && !tree2){
+            return true
+        }
+
+        if(!tree1 || !tree2){
+            return false
+        }
+
+        return tree1.value == tree2.value && this.isIdentical(tree1.left,tree2.left) && this.isIdentical(tree1.right,tree2.right)
+    }
+
+    findKthSmallest(root,k){
+        if(!root){
+            return null
+        }
+        let count = 0
+        let result = null
+        function traverse(node){
+            if(node){
+                traverse(node.left)
+                count++
+                if(count == k){
+                    result = node.value
+                    return
+                }
+                traverse(node.right)
+            }
+        }
+
+        traverse(root)
+        return result
+    }
+
+    findKthLargest(root,k){
+        if(!root){
+            return null
+        }
+        let count = 0
+        let result = null
+
+        function traverse(node){
+            if(node){
+                traverse(node.right)
+                count++
+                if(count == k){
+                    result = node.value
+                }
+                traverse(node.left)
+            }
+        }
+
+        traverse(root)
+        return result
+    }
+
+    findClosest(root,key,closest=null){
+        if(!root){
+            return closest
+        }
+        
+        if(closest == null || Math.abs(root.value - key) < Math.abs(closest - key)){
+            closest = root.value
+        }
+
+        if(key < root.value){
+            return this.findClosest(root.left,key,closest)
+        }
+        else{
+            return this.findClosest(root.right,key,closest)
+        }
+    }
+
+    findSuccessor(root,key,successor = null){
+        if(!root){
+            return null
+        }
+
+        if(key < root.value){
+            successor = root.value
+            return this.findSuccessor(root.left,key,successor)
+        }
+        else if(key > root.value){
+            return this.findSuccessor(root.right,key,successor)
+        }
+        else{
+            if(root.right){
+                return this.min(root.right)
+            }
+        }
+
+        return successor
+    }
+
+    findPredecessor(root,key,predecessor = null){
+        if(!root){
+            return null
+        }
+
+        if(key > root.value){
+            predecessor = root.value
+            return this.findPredecessor(root.right,key,predecessor)
+        }
+        else if(key < root.value){
+            return this.findPredecessor(root.left,key,predecessor)
+        }
+        else{
+            if(root.left){
+                return this.max(root.left)
+            }
+        }
+
+        return predecessor
+    }
+
+    removeDuplicates(){
+        function inOrder(node,visitedNode = new Set()){
+            if(node){
+                inOrder(node.left,visitedNode)
+                visitedNode.add(node.value)
+                inOrder(node.right,visitedNode)
+            }
+
+            return visitedNode
+        }
+
+        let result = inOrder(this.root)
+        this.root = null
+
+        for(let val of [...result]){
+            this.insert(val)
+        }
+    }
+
+    findParent(root,key,parent = null){
+        if(!root){
+            return null
+        }
+
+        if(root.left && root.left.value == key){
+            parent = root.value 
+            return parent
+        }
+
+        if(root.right && root.right.value == key){
+            parent = root.value
+            return parent
+        }
+
+        if(key < root.value){
+            return this.findParent(root.left,key,parent)
+        }else{
+            return this.findParent(root.right,key,parent)
+        }
+    }
+
+    findChildren(root,target){
+        if(!root){
+            return null
+        }
+        else if(root.value == target){
+            const children = {
+                leftChild : root.left ? root.left.value : null,
+                rightchild : root.right ? root.right.value : null
+            }
+            return children
+        }
+        else if(target  < root.value){
+            return this.findChildren(root.left,target)
+        }
+        else{
+            return this.findChildren(root.right,target)
+        }
+    }
+
+    findSiblings(root,key,sibling= null){
+        if(!root){
+            return null
+        }
+
+        if(root.left && root.left.value == key){
+            sibling = root.right ? root.right.value : null
+            return sibling
+        }
+
+        if(root.right && root.right.value == key){
+            sibling = root.left ? root.left.value : null
+            return sibling
+        }
+
+        if(key < root.value){
+            return this.findSiblings(root.left,key,sibling)
+        }
+        else{
+            return this.findSiblings(root.right,key,sibling)
+        }
+    }
+
+    findLeafNode(root,result = []){
+        if(!root){
+            return result
+        }
+
+        if(root){
+            if(!root.left && !root.right){
+                result.push(root.value)
+            }
+            this.findLeafNode(root.left,result)
+            this.findLeafNode(root.right,result)
+        }
+
+        return result
+    }
+
+    findHeight(root){
+        if(!root){
+            return null
+        }
+
+        let queue = []
+
+        queue.push(root)
+        let height = 0
+        while(queue.length){
+            let nodeCount = queue.length
+            height++
+            while(nodeCount){
+                let cur = queue.shift()
+                if(cur.left){
+                    queue.push(cur.left)
+                }
+
+                if(cur.right){
+                    queue.push(cur.right)
+                }
+                nodeCount--
+            }
+        }
+        return height
+    }
+
+    findAncestor(root,target,result=[]){
+        if(!root){
+            return result
+        }
+
+        if(root.value == target){
+            return result
+        }
+
+        result.push(root.value)
+
+        if(target < root.value){
+            return this.findAncestor(root.left,target,result)
+        }else{
+            return this.findAncestor(root.right,target,result)
+        }
+
+    }
+
+    findDescendants(root,target,result=[]){
+        if(!root){
+            return result
+        }
+        else if(target == root.value){
+            this.collectDescendants(root.left,result)
+            this.collectDescendants(root.right,result)
+            return result
+        }
+        else if(target < root.value){
+            return this.findDescendants(root.left,target,result)
+        }
+        else{
+            return this.findDescendants(root.right,target,result)
+        }
+    }
+
+    collectDescendants(root,result=[]){
+        if(root){
+            result.push(root.value)
+            this.collectDescendants(root.left,result)
+            this.collectDescendants(root.right,result)
+        }
+        return result
+    }
+
+    findDegree(root,target){
+        if(!root){
+            return 0
+        }
+
+        if(root.value == target){
+            let degree = 0
+            if(root.left){
+                degree++
+            }
+
+            if(root.right){
+                degree++
+            }
+
+            return degree
+        }
+        else if(target < root.value){
+            return this.findDegree(root.left,target)
+        }
+        else{
+            return this.findDegree(root.right,target)
+        }
+    }
+
+    findDepth(root,target){
+        if(!root){
+            return 0
+        }
+
+        let depth = 0
+        while(root){
+            if(target < root.value){
+                root = root.left
+                depth++
+            }
+            else if(target > root.value){
+                root = root.right
+                depth++
+            }
+            else{
+                return depth
+            }
+        }
+    }
+
+    findDistance(root,target){
+        if(!root){
+            return 0
+        }
+
+        let distance = 0 
+
+        while(root){
+            if(target < root.value){
+                root = root.left
+                distance++
+            }
+            else if(target > root.value){
+                root = root.right
+                distance++
+            }
+            else{
+                return distance
+            }
+        }
+    }
+
+    findLCA(root,n1,n2){
+        if(!root){
+            return false
+        }
+
+        while(root){
+            if(n1 < root.value && n2 < root.value){
+                root = root.left
+            }
+            else if(n1 > root.value && n2 > root.value){
+                root = root.right
+            }
+            else{
+                return root
+            }
+        }
+    }
+
+    path(root,target){
+        if(!root){
+            return null
+        }
+
+        let result = []
+
+        while(root){
+            result.push(root.value)
+
+            if(target < root.value){
+                root = root.left
+            }
+            else if(target > root.value){
+                root = root.right
+            }
+            else{
+                return result
+            }
+        }
+    }
+
+    findDistanceBtwTwoNodes(n1,n2){
+        let lca = this.findLCA(this.root,n1,n2)
+
+        if(!lca){
+            return -1
+        }
+
+        let distance1 = this.findDistance(lca,n1)
+        let distance2 = this.findDistance(lca,n2)
+
+        return distance1 + distance2
+    }
+
+    findPathBetweenTwoNodes(n1,n2){
+        let lca = this.findLCA(this.root,n1,n2)
+
+        if(!lca){
+            return -1
+        }
+
+        let path1 = this.path(lca,n1)
+        let path2 = this.path(lca,n2)
+        path1.pop()
+        path2.reverse()
+        return [...path1,...path2]
+    }
+
+    countNode(root){
+        if(!root){
+            return 0
+        }
+
+        return 1 + this.countNode(root.left) + this.countNode(root.right)
+    }
+
+    countLeftNode(root){
+        if(!root){
+            return 0
+        }
+
+        return this.countNode(root.left)
+    }
+
+    countRightNode(root){
+        if(!root){
+            return 0
+        }
+
+        return this.countNode(root.right)
+    }
+
+    countOnlyTwoChildNode(root){
+        if(!root){
+            return 0
+        }
+
+        let count = 0
+
+        function traverse(node){
+            if(node){
+                if(node.left && node.right){
+                    count++
+                }
+                traverse(node.left)
+                traverse(node.right)
+            }
+        }
+        traverse(root)
+        return count
+    }
+
+    countOnlyOneChildNode(root){
+        if(!root){
+            return 0
+        }
+
+        let count = 0
+
+        function traverse(node){
+            if(node){
+                if((node.left && !node.right) ||(node.right && !node.left)){
+                    count++
+                }
+                traverse(node.left)
+                traverse(node.right)
+            }
+        }
+        traverse(root)
+        return count
+    }
+
+    printingLeftSubtreeNode(root){
+        if(!root){
+            return null
+        }
+
+        function traverse(node,result = []){
+            if(node){
+                traverse(node.left)
+                result.push(node.value)
+                traverse(node.right)
+            }
+            return result
+        }
+
+        let leftSubtree = traverse(root.left)
+        return leftSubtree
+    }
+
+    printingRightSubtreeNode(root){
+        if(!root){
+            return null
+        }
+
+        function inOrder(node,result = []){
+            if(node){
+                inOrder(node.left,result)
+                result.push(node.value)
+                inOrder(node.right,result)
+            }
+            return result
+        }
+
+        let rightSubtree = inOrder(root.right)
+        return rightSubtree
+    }
+}
+
+
+const bst = new Bst()
+
+// ---------- INSERT ----------
+;[10, 5, 15, 3, 7, 12, 18, 6].forEach(v => bst.insert(v))
+
+console.log("BST created")
+
+// ---------- TRAVERSALS ----------
+console.log("\nInOrder (sorted):")
+bst.inOrder(bst.root)
+
+console.log("\nPreOrder:")
+bst.preOrder(bst.root)
+
+console.log("\nPostOrder:")
+bst.postOrder(bst.root)
+
+console.log("\nLevelOrder:")
+bst.levelOrder(bst.root)
+
+// ---------- SEARCH ----------
+console.log("\nSearch 7:", bst.search(bst.root, 7))
+console.log("Search 20:", bst.search(bst.root, 20))
+
+// ---------- MIN / MAX ----------
+console.log("\nMin:", bst.min(bst.root))
+console.log("Max:", bst.max(bst.root))
+console.log("MinNode:", bst.minNode(bst.root))
+console.log("MaxNode:", bst.maxNode(bst.root))
+
+// ---------- DELETE ----------
+bst.delete(15)
+console.log("\nAfter deleting 15 (InOrder):")
+bst.inOrder(bst.root)
+
+// ---------- PRIME VALUES ----------
+console.log("\nPrime values:", bst.findPrimes(bst.root))
+
+// ---------- BST VALIDATION ----------
+console.log("\nIs valid BST:", bst.isBst(bst.root))
+
+// ---------- IDENTICAL ----------
+const bst2 = new Bst()
+;[10,5,3,7,6,12,18].forEach(v => bst2.insert(v))
+console.log("Is identical tree:", bst.isIdentical(bst.root, bst2.root))
+
+// ---------- KTH ----------
+console.log("\n3rd Smallest:", bst.findKthSmallest(bst.root,3))
+console.log("2nd Largest:", bst.findKthLargest(bst.root,2))
+
+// ---------- CLOSEST ----------
+console.log("\nClosest to 13:", bst.findClosest(bst.root,13))
+
+// ---------- SUCCESSOR / PREDECESSOR ----------
+console.log("\nSuccessor of 12:", bst.findSuccessor(bst.root,12))
+console.log("Predecessor of 12:", bst.findPredecessor(bst.root,12))
+
+// ---------- PARENT / CHILD / SIBLING ----------
+console.log("\nParent of 6:", bst.findParent(bst.root,6))
+console.log("Children of 5:", bst.findChildren(bst.root,5))
+console.log("Sibling of 7:", bst.findSiblings(bst.root,7))
+
+// ---------- LEAF NODES ----------
+console.log("\nLeaf Nodes:", bst.findLeafNode(bst.root))
+
+// ---------- HEIGHT ----------
+console.log("\nHeight:", bst.findHeight(bst.root))
+
+// ---------- ANCESTORS / DESCENDANTS ----------
+console.log("\nAncestors of 6:", bst.findAncestor(bst.root,6))
+console.log("Descendants of 5:", bst.findDescendants(bst.root,5))
+
+// ---------- DEGREE / DEPTH / DISTANCE ----------
+console.log("\nDegree of 5:", bst.findDegree(bst.root,5))
+console.log("Depth of 6:", bst.findDepth(bst.root,6))
+console.log("Distance from root to 6:", bst.findDistance(bst.root,6))
+
+// ---------- LCA ----------
+console.log("\nLCA of 6 & 12:", bst.findLCA(bst.root,6,12).value)
+
+// ---------- PATH ----------
+console.log("\nPath to 6:", bst.path(bst.root,6))
+
+// ---------- DISTANCE BETWEEN TWO NODES ----------
+console.log("\nDistance between 6 & 12:", bst.findDistanceBtwTwoNodes(6,12))
+
+// ---------- PATH BETWEEN TWO NODES ----------
+console.log("\nPath between 6 & 12:", bst.findPathBetweenTwoNodes(6,12))
+
+// ---------- COUNTS ----------
+console.log("\nTotal Nodes:", bst.countNode(bst.root))
+console.log("Left Subtree Node Count:", bst.countLeftNode(bst.root))
+console.log("Right Subtree Node Count:", bst.countRightNode(bst.root))
+console.log("Only One Child Nodes:", bst.countOnlyOneChildNode(bst.root))
+console.log("Only Two Child Nodes:", bst.countOnlyTwoChildNode(bst.root))
+
+// ---------- SUBTREES ----------
+console.log("\nLeft Subtree Nodes:", bst.printingLeftSubtreeNode(bst.root))
+console.log("Right Subtree Nodes:", bst.printingRightSubtreeNode(bst.root))
+
+// ---------- REMOVE DUPLICATES ----------
+bst.insert(7)
+bst.insert(7)
+bst.removeDuplicates()
+console.log("\nAfter removing duplicates (InOrder):")
+bst.inOrder(bst.root)
