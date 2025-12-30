@@ -284,147 +284,569 @@
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class Stack{
-    constructor(){
-        this.items = []
+// class Stack{
+//     constructor(){
+//         this.items = []
+//     }
+
+//     isEmpty(){
+//         return this.items.length == 0
+//     }
+
+//     push(val){
+//         this.items.push(val)
+//     }
+
+//     pop(){
+//         if(this.isEmpty()){
+//             return null
+//         }
+//         else{
+//             return this.items.pop()
+//         }
+//     }
+//     peek(){
+//         if(this.isEmpty()){
+//             return null
+//         }
+//         else{
+//             return this.items[this.items.length-1]
+//         }
+//     }
+
+//     display(){
+//         return this.items
+//     }
+
+//     getSize(){
+//         return this.items.length
+//     }
+
+//     reverseArr(arr){
+//         let s = new Stack()
+
+//         for(let val of arr){
+//             s.push(val)
+//         }
+
+//         let reversedArr = []
+
+//         while(s.items.length){
+//             reversedArr.push(s.pop())
+//         }
+
+//         return reversedArr
+//     }
+
+
+//     reverseStr(str){
+//         let s = new Stack()
+
+//         for(let val of str){
+//             s.push(val)
+//         }
+
+//         let reversedStr = ''
+
+//         while(s.items.length){
+//             reversedStr += s.pop()
+//         }
+
+//         return reversedStr
+//     }
+// }
+
+
+// class ObjStack{
+//     constructor(){
+//         this.items = {}
+//         this.top = 0
+//     }
+
+//     isEmpty(){
+//         return this.top == 0
+//     }
+
+//     push(val){
+//         this.items[this.top] = val
+//         this.top++
+//     }
+
+//     pop(){
+//         if(this.isEmpty()){
+//             return null
+//         }else{
+//             let val = this.items[this.top-1]
+//             delete this.items[this.top-1]
+//             this.top--
+//             return val
+//         }
+//     }
+
+//     peek(){
+//         if(this.isEmpty()){
+//             return null
+//         }else{
+//             let val = this.items[this.top-1]
+//             return val
+//         }
+//     }
+
+//     diplay(){
+//         return Object.values(this.items)
+//     }
+
+//     getSize(){
+//         return this.top
+//     }
+// }
+
+// class Node{
+//     constructor(val){
+//         this.val = val
+//         this.next = null
+//     }
+// }
+// class StackLL{
+//     constructor(){
+//         this.head = null
+//         this.size = 0
+//     }
+
+//     isEmpty(){
+//         return this.size == 0
+//     }
+
+//     push(val){
+//         const node = new Node(val)
+//         if(this.isEmpty()){
+//             this.head = node
+//         }else{
+//             this.head.next = node
+//             this.head = node
+//         }
+//         this.size++
+//     }
+// }
+
+//sort
+
+// function bubbleSort(arr){
+//     let swapped = true
+
+//     while(swapped){
+//         swapped = false
+//         for(let i=0;i<arr.length-1;i++){
+//             if(arr[i] > arr[i+1]){
+//                 [arr[i],arr[i+1]] = [arr[i+1],arr[i]]
+//                 swapped = true
+//             }
+//         }
+//     }
+
+//     return arr
+// }
+
+// function insertionSort(arr){
+//     for(let i=1;i<arr.length;i++){
+//         let cur = arr[i]
+//         let j = i - 1
+
+//         while(j >= 0 && arr[j] > cur){
+//             arr[j+1] = arr[j]
+//             j--
+//         }
+
+//         arr[j+1] = cur
+//     }
+
+//     return arr
+// }
+
+// function selectionSort(arr){
+//     for(let i=0;i<arr.length-1;i++){
+//         let minElement = i
+//         for(let j=i+1;j<arr.length;j++){
+//             if(arr[minElement] > arr[j]){
+//                 minElement = j
+//             }
+//         }
+//         let temp = arr[i]
+//         arr[i] = arr[minElement]
+//         arr[minElement] = temp
+//     }
+
+//     return arr
+// }
+
+// function quickSort(arr){
+//     if(arr.length < 2){
+//         return arr
+//     }
+
+//     let pivot = arr[arr.length-1]
+//     let leftArr = []
+//     let rightArr = []
+
+//     for(let i=0;i<arr.length-1;i++){
+//         if(arr[i] < pivot){
+//             leftArr.push(arr[i])
+//         }else{
+//             rightArr.push(arr[i])
+//         }
+//     }
+
+//     return [...quickSort(leftArr),pivot,...quickSort(rightArr)]
+// }
+
+// function merge(arr){
+//     if(arr.length < 2){
+//         return arr
+//     }
+
+//     let mid = Math.floor(arr.length/2)
+//     let leftArr = merge(arr.slice(0,mid))
+//     let rightArr = merge(arr.slice(mid))
+
+//     return mergeSort(leftArr,rightArr)
+// }
+
+// function mergeSort(leftArr,rightArr){
+//     let sortedArr = []
+
+//     while(leftArr.length && rightArr.length){
+//         if(leftArr[0] < rightArr[0]){
+//             sortedArr.push(leftArr.shift())
+//         }else{
+//             sortedArr.push(rightArr.shift())
+//         }
+//     }
+
+//     return sortedArr.concat(leftArr,rightArr)
+// }
+
+//stack
+
+// class Stack{
+//     constructor(){
+//         this.items = []
+//     }
+
+//     isEmpty(){
+//         return this.items.length == 0
+//     }
+
+//     push(value){
+//         this.items.push(value)
+//     }
+
+//     pop(){
+//         if(this.isEmpty()){
+//             return -1
+//         }
+//         return this.items.pop()
+//     }
+
+//     peek(){
+//         if(this.isEmpty()){
+//             return -1
+//         }
+
+//         return this.items[this.items.length-1]
+//     }
+
+//     print(){
+//         return this.items
+//     }
+
+//     reverseStr(val){
+//         let s = new Stack()
+
+//         for(let ch of val){
+//             s.push(ch)
+//         }
+
+//         let sortedArr = []
+
+//         while(s.items.length){
+//             sortedArr.push(s.pop())
+//         }
+
+//         return sortedArr.join('')
+//     }
+
+//     reverseArr(arr){
+//         let s = new Stack()
+
+//         for(let val of arr){
+//             s.push(val)
+//         }
+
+//         let sortedArr = []
+
+//         while(s.items.length){
+//             sortedArr.push(s.pop())
+//         }
+
+//         return sortedArr
+//     }
+// }
+
+// const s = new Stack()
+// s.push(10)
+// s.push(20)
+// s.push(30)
+
+// console.log(s.peek())       // 30
+// console.log(s.pop())        // 30
+// console.log(s.reverseStr("abc")) // "cba"
+// console.log(s.reverseArr([1,2,3])) // [3,2,1]
+
+
+// class Stack2{
+//     constructor(){
+//         this.items = {}
+//         this.size = 0
+//     }
+
+//     isEmpty(){
+//         return this.size == 0
+//     }
+
+//     push(value){
+//         this.items[this.size] = value
+//         this.size++
+//     }
+
+//     pop(){
+//         if(this.isEmpty()){
+//             return -1
+//         }
+
+//         let val = this.items[this.size-1]
+//         delete this.items[this.size-1]
+//         this.size--
+//         return val
+//     }
+
+//     peek(){
+//         if(this.isEmpty()){
+//             return -1
+//         }
+
+//         return this.items[this.size-1]
+//     }
+
+//     print(){
+//         return this.items
+//     }
+// }
+
+// // Test Stack2
+
+// const stack = new Stack2()
+
+// console.log(stack.isEmpty())   // true
+
+// stack.push(10)
+// stack.push(20)
+// stack.push(30)
+
+// console.log(stack.print())     // { '0': 10, '1': 20, '2': 30 }
+
+// console.log(stack.peek())      // 30
+
+// console.log(stack.pop())       // 30
+// console.log(stack.pop())       // 20
+
+// console.log(stack.peek())      // 10
+
+// stack.push(40)
+
+// console.log(stack.print())     // { '0': 10, '1': 40 }
+
+// console.log(stack.pop())       // 40
+// console.log(stack.pop())       // 10
+
+// console.log(stack.pop())       // -1 (stack underflow)
+// console.log(stack.isEmpty())   // true
+
+
+// let arr = [4,4,1,2,1,1,3]
+
+// let freqMap = {}
+
+// for(let val of arr){
+//     if(freqMap[val]){
+//         freqMap[val]++
+//     }else{
+//         freqMap[val] = 1
+//     }
+// }
+
+// let result = Object.entries(freqMap)
+
+// result.sort((a,b)=>{
+//     if(a[1] == b[1]){
+//         return a[0] - b[0]
+//     }else{
+//        return b[1] - a[1]
+//     }
+// })
+
+// let final = []
+
+// for(let [key,val] of result){
+//     for(let i=1;i<=val;i++){
+//         final.push(Number(key))
+//     }
+// }
+
+// console.log(final)
+
+// let arr = [2, -7, 3, -2, 5]
+
+// let swapped = true
+
+// while(swapped){
+//     swapped = false
+//     for(let i=0;i<arr.length-1;i++){
+//         if(Math.abs(arr[i]) > Math.abs(arr[i+1])){
+//             [arr[i],arr[i+1]] = [arr[i+1],arr[i]]
+//             swapped = true
+//         }
+//     }
+// }
+
+// console.log(arr)
+
+
+// let words = ["apple", "bat", "car", "a", "dog"]
+
+// words.sort((a,b)=>{
+//     if(a.length == b.length){
+//         return a.localeCompare(b)
+//     }else{
+//        return a.length - b.length
+//     }
+// })
+
+// console.log(words)
+
+// let a = [5, 10, 7]
+
+// a.sort((a,b)=>a-b)
+
+// console.log(a[0] + a[1] > a[2])
+
+// let s1 = "listen"
+// let s2 = "silent"
+
+// s1 = s1.split('').sort().join("")
+// s2 = s2.split('').sort().join("")
+
+// console.log(s1 == s2)
+
+// let  arr = [7, 10, 4, 3, 20, 15]
+// let k = 3
+
+// // arr.sort((a,b)=>a-b)
+// // console.log(arr[k-1])
+
+// function quickSelect(arr,k){
+//     if(arr.length == 0){
+//         return arr[0]
+//     }
+
+//     let pivot = arr[arr.length-1]
+//     let leftArr = []
+//     let rightArr = []
+
+//     for(let i=0;i<arr.length-1;i++){
+//         if(arr[i] < pivot){
+//             leftArr.push(arr[i])
+//         }else{
+//             rightArr.push(arr[i])
+//         }
+//     }
+
+//     if(leftArr.length == k-1){
+//         return pivot
+//     }
+//     else if(leftArr.length >= k){
+//         return quickSelect(leftArr,k)
+//     }
+//     else{
+//         return quickSelect(rightArr,k-leftArr.length-1)
+//     }
+// }
+
+// console.log(quickSelect(arr,k))
+
+// let A = [2, 1, 2, 5, 7, 1, 9]
+// let B = [2, 1, 8]
+
+// let index = 0
+// let refIndex = 0
+// while(index < B.length){
+//     let take = B[index]
+//     for(let i=0;i<A.length;i++){
+//         if(A[i] == take){
+//             [A[i],A[refIndex]] = [A[refIndex],A[i]]
+//             refIndex++
+//         }
+//     }
+//     index++
+// }
+
+// A = A.slice(0,index) .concat(A.slice(index).sort((a,b)=>a-b))
+
+// console.log(A)
+
+// Input: ["eat", "tea", "tan", "ate", "nat", "bat"]
+// Output:
+// [["eat","tea","ate"],["tan","nat"],["bat"]]
+
+// let words = ["eat", "tea", "tan", "ate", "nat", "bat"]
+
+// let freqMap = {}
+
+// for(let val of words){
+//     let take = val.split('').sort().join("")
+//     if(freqMap[take]){
+//         freqMap[take].push(val)
+//     }else{
+//         freqMap[take] = [val]
+//     }
+// }
+
+// let result = []
+
+// for(let key in freqMap){
+//     result.push(freqMap[key])
+// }
+
+// console.log(result)
+
+let arr = [2,0,2,1,1,0]
+
+let low = 0
+let high = arr.length - 1
+let mid = 0
+
+while(mid <= high){
+    if(arr[mid] == 0){
+        [arr[low],arr[mid]] = [arr[mid],arr[low]]
+        low++
+        mid++
     }
-
-    isEmpty(){
-        return this.items.length == 0
+    else if(arr[mid] == 1){
+        mid++
     }
-
-    push(val){
-        this.items.push(val)
-    }
-
-    pop(){
-        if(this.isEmpty()){
-            return null
-        }
-        else{
-            return this.items.pop()
-        }
-    }
-    peek(){
-        if(this.isEmpty()){
-            return null
-        }
-        else{
-            return this.items[this.items.length-1]
-        }
-    }
-
-    display(){
-        return this.items
-    }
-
-    getSize(){
-        return this.items.length
-    }
-
-    reverseArr(arr){
-        let s = new Stack()
-
-        for(let val of arr){
-            s.push(val)
-        }
-
-        let reversedArr = []
-
-        while(s.items.length){
-            reversedArr.push(s.pop())
-        }
-
-        return reversedArr
-    }
-
-
-    reverseStr(str){
-        let s = new Stack()
-
-        for(let val of str){
-            s.push(val)
-        }
-
-        let reversedStr = ''
-
-        while(s.items.length){
-            reversedStr += s.pop()
-        }
-
-        return reversedStr
+    else{
+        [arr[mid],arr[high]] = [arr[high],arr[mid]]
+        high--
     }
 }
 
-
-class ObjStack{
-    constructor(){
-        this.items = {}
-        this.top = 0
-    }
-
-    isEmpty(){
-        return this.top == 0
-    }
-
-    push(val){
-        this.items[this.top] = val
-        this.top++
-    }
-
-    pop(){
-        if(this.isEmpty()){
-            return null
-        }else{
-            let val = this.items[this.top-1]
-            delete this.items[this.top-1]
-            this.top--
-            return val
-        }
-    }
-
-    peek(){
-        if(this.isEmpty()){
-            return null
-        }else{
-            let val = this.items[this.top-1]
-            return val
-        }
-    }
-
-    diplay(){
-        return Object.values(this.items)
-    }
-
-    getSize(){
-        return this.top
-    }
-}
-
-class Node{
-    constructor(val){
-        this.val = val
-        this.next = null
-    }
-}
-class StackLL{
-    constructor(){
-        this.head = null
-        this.size = 0
-    }
-
-    isEmpty(){
-        return this.size == 0
-    }
-
-    push(val){
-        const node = new Node(val)
-        if(this.isEmpty()){
-            this.head = node
-        }else{
-            this.head.next = node
-            this.head = node
-        }
-        this.size++
-    }
-}
+console.log(arr)
