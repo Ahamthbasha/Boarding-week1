@@ -828,25 +828,294 @@
 
 // console.log(result)
 
-let arr = [2,0,2,1,1,0]
+// let arr = [2,0,2,1,1,0]
 
-let low = 0
-let high = arr.length - 1
-let mid = 0
+// let low = 0
+// let high = arr.length - 1
+// let mid = 0
 
-while(mid <= high){
-    if(arr[mid] == 0){
-        [arr[low],arr[mid]] = [arr[mid],arr[low]]
-        low++
-        mid++
+// while(mid <= high){
+//     if(arr[mid] == 0){
+//         [arr[low],arr[mid]] = [arr[mid],arr[low]]
+//         low++
+//         mid++
+//     }
+//     else if(arr[mid] == 1){
+//         mid++
+//     }
+//     else{
+//         [arr[mid],arr[high]] = [arr[high],arr[mid]]
+//         high--
+//     }
+// }
+
+// console.log(arr)
+
+// class Node{
+//     constructor(value){
+//         this.value = value
+//         this.next = null
+//     }
+// }
+
+// class Stack{
+//     constructor(){
+//         this.head = null
+//         this.size = 0
+//     }
+
+//     isEmpty(){
+//         return this.size == 0
+//     }
+
+//     push(value){
+//         const node = new Node(value)
+//         node.next = this.head
+//         this.head = node
+//         this.size++
+//     }
+
+//     pop(){
+//         if(this.isEmpty()){
+//             return -1
+//         }
+//         else if(this.size == 1){
+//             let val = this.head.value
+//             this.head = null
+//             this.size--
+//             return val
+//         }
+//         else{
+//             let val = this.head.value
+//             this.head = this.head.next
+//             this.size--
+//             return val
+//         }
+//     }
+
+//     peek(){
+//         if(this.isEmpty()){
+//             return -1
+//         }else{
+//             return this.head.value
+//         }
+//     }
+
+//     print(){
+//         if(this.isEmpty()){
+//             return -1
+//         }
+//         else{
+//             let temp = this.head
+//             let list = ''
+//             while(temp){
+//                 list += temp.value + '->'
+//                 temp = temp.next
+//             }
+
+//             list += 'null'
+
+//             return list
+//         }
+//     }
+// }
+
+// const s = new Stack()
+
+// console.log(s.pop())      // -1
+// console.log(s.peek())     // -1
+
+// s.push(10)
+// s.push(20)
+// s.push(30)
+
+// console.log(s.print())    // 30->20->10->null
+
+// console.log(s.peek())     // 30
+// console.log(s.pop())      // 30
+// console.log(s.pop())      // 20
+
+// console.log(s.print())    // 10->null
+
+// console.log(s.pop())      // 10
+// console.log(s.pop())      // -1
+
+
+//queue
+
+// class Queue{
+//     constructor(){
+//         this.item = []
+//     }
+
+//     isEmpty(){
+//         return this.item.length == 0
+//     }
+
+//     enqueue(val){
+//         this.item.push(val)
+//     }
+
+//     dequeue(){
+//         if(this.isEmpty()){
+//             return -1
+//         }
+
+//         let val = this.item.shift()
+//         return val
+//     }
+
+//     peek(){
+//         if(this.isEmpty()){
+//             return -1
+//         }
+
+//         return this.item[0]
+//     }
+
+//     print(){
+//         return this.item
+//     }
+
+//     reverseArr(arr){
+//         let q = new Queue()
+//         for(let val of arr){
+//             q.enqueue(val)
+//         }
+
+//         let stack = []
+
+//         while(q.item.length){
+//             stack.push(q.dequeue())
+//         }
+
+//         let reversedArr = []
+
+//         while(stack.length){
+//             reversedArr.push(stack.pop())
+//         }
+
+//         return reversedArr
+//     }
+
+//     reversedStr(str){
+//         let q = new Queue()
+
+//         for(let ch of str){
+//             q.enqueue(ch)
+//         }
+
+//         let stack = []
+
+//         while(q.item.length){
+//             stack.push(q.dequeue())
+//         }
+
+//         let result = []
+
+//         while(stack.length){
+//             result.push(stack.pop())
+//         }
+
+//         return result.join('')
+//     }
+// }
+
+// const q = new Queue()
+
+// // Basic queue operations
+// console.log(q.isEmpty())        // true
+// console.log(q.dequeue())        // -1
+
+// q.enqueue(10)
+// q.enqueue(20)
+// q.enqueue(30)
+
+// console.log(q.print())          // [10, 20, 30]
+// console.log(q.peek())           // 10
+// console.log(q.dequeue())        // 10
+// console.log(q.print())          // [20, 30]
+
+// // Reverse array
+// console.log(q.reverseArr([1,2,3,4])) // [4,3,2,1]
+// console.log(q.reverseArr([]))        // []
+// console.log(q.reverseArr([5]))       // [5]
+
+// // Reverse string
+// console.log(q.reversedStr("abc"))    // "cba"
+// console.log(q.reversedStr("hello"))  // "olleh"
+// console.log(q.reversedStr(""))       // ""
+// console.log(q.reversedStr("a"))      // "a"
+
+//object
+
+
+class Queue{
+    constructor(){
+        this.items = {}
+        this.head = 0
+        this.tail = 0
     }
-    else if(arr[mid] == 1){
-        mid++
+
+    isEmpty(){
+        return this.tail - this.head == 0
     }
-    else{
-        [arr[mid],arr[high]] = [arr[high],arr[mid]]
-        high--
+
+    enqueue(value){
+        this.items[this.tail] = value
+        this.tail++
+    }
+
+    dequeue(){
+        if(this.isEmpty()){
+            return -1
+        }
+
+        let val = this.items[this.head]
+        delete this.items[this.head]
+        this.head++
+        return val
+    }
+
+    peek(){
+        if(this.isEmpty()){
+            return -1
+        }
+
+        return this.items[this.head]
+    }
+
+    print(){
+        return this.items
     }
 }
+// ================= TEST CASES =================
 
-console.log(arr)
+const q = new Queue()
+
+console.log("Is Empty (true):", q.isEmpty())        // true
+console.log("Peek on empty (-1):", q.peek())        // -1
+console.log("Dequeue on empty (-1):", q.dequeue())  // -1
+
+q.enqueue(10)
+q.enqueue(20)
+q.enqueue(30)
+
+console.log("Is Empty (false):", q.isEmpty())       // false
+console.log("Peek (10):", q.peek())                 // 10
+
+console.log("Dequeue (10):", q.dequeue())           // 10
+console.log("Dequeue (20):", q.dequeue())           // 20
+
+q.enqueue(40)
+q.enqueue(50)
+
+console.log("Peek (30):", q.peek())                 // 30
+console.log("Print Queue:", q.print())              // { '2': 30, '3': 40, '4': 50 }
+
+console.log("Dequeue (30):", q.dequeue())           // 30
+console.log("Dequeue (40):", q.dequeue())           // 40
+console.log("Dequeue (50):", q.dequeue())           // 50
+
+console.log("Is Empty (true):", q.isEmpty())        // true
+console.log("Final Print ({}):", q.print())         // {}
