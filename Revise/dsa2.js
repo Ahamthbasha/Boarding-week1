@@ -1241,112 +1241,626 @@
 //implement queue using stack
 
 
-class Stack{
-    constructor(){
-        this.items = []
+// class Stack{
+//     constructor(){
+//         this.items = []
+//     }
+
+//     isEmpty(){
+//         return this.items.length == 0
+//     }
+
+//     push(val){
+//         this.items.push(val)
+//     }
+
+//     pop(){
+//         if(this.isEmpty()){
+//             return -1
+//         }
+
+//         return this.items.pop()
+//     }
+
+//     peek(){
+//         if(this.isEmpty()){
+//             return -1
+//         }
+
+//         return this.items[this.items.length-1]
+//     }
+// }
+
+// class Queue{
+//     constructor(){
+//         this.s1 = new Stack()
+//         this.s2 = new Stack()
+//     }
+
+//     isEmpty(){
+//         return this.s1.isEmpty() && this.s2.isEmpty()
+//     }
+
+//     enqueue(val){
+//         this.s1.push(val)
+//     }
+
+//     dequeue(){
+//         if(this.isEmpty()){
+//             return -1
+//         }
+
+//         if(this.s2.isEmpty()){
+//             while(!this.s1.isEmpty()){
+//                 this.s2.push(this.s1.pop())
+//             }
+//         }
+
+//         return this.s2.pop()
+//     }
+
+//     peek(){
+//         if(this.isEmpty()){
+//             return -1
+//         }
+
+//         if(this.s2.isEmpty()){
+//             while(!this.s1.isEmpty()){
+//                 this.s2.push(this.s1.pop())
+//             }
+//         }
+
+//         return this.s2.peek()
+//     }
+
+//     print(){
+//         return [...this.s2.items].reverse().concat(this.s1.items)
+//     }
+// }
+
+// const q = new Queue()
+
+// // Empty queue checks
+// console.log(q.dequeue())   // -1
+// console.log(q.peek())      // -1
+// console.log(q.isEmpty())   // true
+// console.log(q.print())     // []
+
+// // Enqueue elements
+// q.enqueue(10)
+// q.enqueue(20)
+// q.enqueue(30)
+
+// console.log(q.peek())      // 10
+// console.log(q.print())     // [10, 20, 30]
+
+// // Dequeue elements
+// console.log(q.dequeue())  // 10
+// console.log(q.print())    // [20, 30]
+
+// q.enqueue(40)
+// console.log(q.print())    // [20, 30, 40]
+
+// console.log(q.dequeue())  // 20
+// console.log(q.dequeue())  // 30
+// console.log(q.dequeue())  // 40
+
+// // Queue should be empty again
+// console.log(q.dequeue())  // -1
+// console.log(q.peek())     // -1
+// console.log(q.isEmpty())  // true
+// console.log(q.print())    // []
+
+
+// valid parenthesis
+
+// let str = "{}[]()"
+
+// let bracketMap = {
+//     "(" : ")",
+//     "{" : "}",
+//     "[" : "]"
+// }
+
+// let stack = []
+
+// for(let sym of str){
+//     if(bracketMap[sym]){
+//         stack.push(sym)
+//     }else{
+//         if(stack.length == 0 || bracketMap[stack.pop()] != sym){
+//             console.log(false)
+//             return
+//         }
+//     }
+// }
+
+// console.log(stack)
+
+// console.log(stack.length == 0)
+
+
+// Input: [4,5,2,10]
+// Output: [5,10,10,-1]
+
+// let arr = [4,5,2,10,20]
+
+// let newArr = []
+
+// for(let i=0;i<arr.length;i++){
+//     if(i == arr.length-1){
+//         newArr.push(-1)
+//     }else{
+//         for(let j=i+1;j<arr.length;j++){
+//             if(arr[j] > arr[i]){
+//                 newArr.push(arr[j])
+//                 break
+//             }
+//         }
+//     }
+// }
+
+// console.log(newArr)
+
+// let stack = []
+// let result = new Array(arr.length).fill(-1)
+
+// for(let i=0;i<arr.length;i++){
+//     while(stack.length && arr[i] > arr[stack[stack.length-1]]){
+//         let index = stack.pop()
+//         result[index] = arr[i]
+//     }
+//     stack.push(i)
+// }
+
+// console.log(result)
+
+
+// Input: "abbaca"
+// Output: "ca"
+
+// let str = "abbaca"
+
+// let stack = []
+
+// for(let i=0;i<str.length;i++){
+//     let take = stack[stack.length-1] || ""
+
+//     if(take == str[i]){
+//         stack.pop()
+//     }else{
+//         stack.push(str[i])
+//     }
+// }
+
+// console.log(stack.join(""))
+
+// let input = "23*54*+9-"
+// // Output: 17
+
+// let stack = []
+// for(let val of input){
+//     if(/[0-9]/g.test(val)){
+//         stack.push(Number(val))
+//     }
+//     else{
+//         let result
+//         let left = stack.pop()
+//         let right = stack.pop()
+
+//         switch(val){
+//             case "+":
+//                 result = right + left 
+//                 break
+//             case "-":
+//                 result = right - left
+//                 break
+//             case "*":
+//                 result = right * left
+//                 break
+//             case "/":
+//                 result = Math.floor(right/left)
+//                 break
+//         }
+//         stack.push(result)
+//     }
+// }
+
+// console.log(stack)
+
+// console.log(result)
+
+//build stack by using queue
+
+// class Queue{
+//     constructor(){
+//         this.items = []
+//     }
+
+//     isEmpty(){
+//         return this.items.length == 0
+//     }
+
+//     enqueue(val){
+//         this.items.push(val)
+//     }
+
+//     dequeue(){
+//         if(this.isEmpty()){
+//             return -1
+//         }
+//         return this.items.shift()
+//     }
+
+//     peek(){
+//         if(this.isEmpty()){
+//             return -1
+//         }
+//         return this.items[0]
+//     }
+
+//     print(){
+//         return this.items
+//     }
+// }
+
+// class Stack{
+//     constructor(){
+//         this.q = new Queue()
+//     }
+
+//     isEmpty(){
+//         return this.q.isEmpty()
+//     }
+
+//     push(val){
+//         this.q.enqueue(val)
+
+//         let size = this.q.items.length
+
+//         for(let i=0;i<size-1;i++){
+//             this.q.enqueue(this.q.dequeue())
+//         }
+//     }
+
+//     pop(){
+//         if(this.isEmpty()){
+//             return -1
+//         }
+//         return this.q.dequeue()
+//     }
+
+//     peek(){
+//         if(this.isEmpty()){
+//             return -1
+//         }
+//         return this.q.peek()
+//     }
+
+//     print(){
+//         return this.q.print()
+//     }
+// }
+
+// hash table
+
+// class Hashtable{
+//     constructor(size){
+//         this.table = new Array(size)
+//         this.size = size
+//     }
+
+//     hashKey(key){
+//         let total = 0
+//         for(let i=0;i<key.length;i++){
+//             total += key.charCodeAt(i)
+//         }
+
+//         return total % this.size
+//     }
+
+//     set(key,value){
+//         let index = this.hashKey(key)
+//         this.table[index] = value
+//     }
+
+//     get(key){
+//         let index = this.hashKey(key)
+//         if(this.table[index]){
+//             return this.table[index]
+//         }else{
+//             return 'no key found'
+//         }
+//     }
+
+//     remove(key){
+//         let index = this.hashKey(key)
+
+//         if(this.table[index]){
+//             this.table[index] = undefined
+//             return 'removed'
+//         }else{
+//             return 'no key found'
+//         }
+//     }
+
+//     print(){
+//         for(let i=0;i<this.table.length;i++){
+//             if(this.table[i]){
+//                 console.log(`${i} => ${this.table[i]}`)
+//             }
+//         }
+//     }
+// }
+
+// const ht = new Hashtable(10)
+
+// // Insert values
+// ht.set("name", "Alice")
+// ht.set("age", 25)
+// ht.set("city", "Delhi")
+
+// // Get values
+// console.log(ht.get("name"))   // Alice
+// console.log(ht.get("age"))    // 25
+// console.log(ht.get("city"))   // Delhi
+// console.log(ht.get("email"))  // no key found
+
+// // Update existing key
+// ht.set("name", "Bob")
+// console.log(ht.get("name"))   // Bob
+
+// // Remove key
+// console.log(ht.remove("age")) // removed
+// console.log(ht.get("age"))    // no key found
+
+// // Remove non-existing key
+// console.log(ht.remove("salary")) // no key found
+
+// // Print table
+// ht.print()
+
+
+//separate chaining
+
+class Hashtable{
+    constructor(size){
+        this.table = new Array(size)
+        this.size = size
     }
 
-    isEmpty(){
-        return this.items.length == 0
-    }
-
-    push(val){
-        this.items.push(val)
-    }
-
-    pop(){
-        if(this.isEmpty()){
-            return -1
+    hashKey(key){
+        let total = 0
+        for(let i=0;i<key.length;i++){
+            total += key.charCodeAt(i)
         }
-
-        return this.items.pop()
+        return total % this.size
     }
 
-    peek(){
-        if(this.isEmpty()){
-            return -1
-        }
+    set(key,value){
+        let index = this.hashKey(key)
+        let bucket = this.table[index]
+        if(!bucket){
+            this.table[index] = [[key,value]]
+        }else{
+            let sameKey = bucket.find((val)=>val[0] == key)
 
-        return this.items[this.items.length-1]
-    }
-}
-
-class Queue{
-    constructor(){
-        this.s1 = new Stack()
-        this.s2 = new Stack()
-    }
-
-    isEmpty(){
-        return this.s1.isEmpty() && this.s2.isEmpty()
-    }
-
-    enqueue(val){
-        this.s1.push(val)
-    }
-
-    dequeue(){
-        if(this.isEmpty()){
-            return -1
-        }
-
-        if(this.s2.isEmpty()){
-            while(!this.s1.isEmpty()){
-                this.s2.push(this.s1.pop())
+            if(sameKey){
+                sameKey[1] = value
+            }
+            else{
+                bucket.push([key,value])
             }
         }
-
-        return this.s2.pop()
     }
 
-    peek(){
-        if(this.isEmpty()){
+    get(key){
+        let index = this.hashKey(key)
+        let bucket = this.table[index]
+        if(!bucket){
             return -1
         }
-
-        if(this.s2.isEmpty()){
-            while(!this.s1.isEmpty()){
-                this.s2.push(this.s1.pop())
-            }
+        if(bucket){
+            let sameKey = bucket.find((val)=>val[0]==key)
+            return sameKey ? sameKey[1] :-1
         }
+    }
 
-        return this.s2.peek()
+    remove(key){
+        let index = this.hashKey(key)
+
+        let bucket = this.table[index]
+
+        if(bucket != undefined){
+            let bucketIndex = bucket.findIndex((item)=>item[0] == key)
+
+            if(bucketIndex != -1){
+                return bucket.splice(bucketIndex,1)
+            }
+
+        }else{
+            return -1
+        }
     }
 
     print(){
-        return [...this.s2.items].reverse().concat(this.s1.items)
+        for(let i=0;i<this.table.length;i++){
+            if(this.table[i]){
+                console.log(`${i} => ${this.table[i]}`)
+            }
+        }
+    }
+
+    findDuplicatesFromInputAndUnique(input){
+        const givenInput = Array.isArray(input) ? input : input.split('')
+
+        let table = new Hashtable(50)
+
+        for(let i=0;i<givenInput.length;i++){
+            let val = givenInput[i].toString()
+            let takeCount = table.get(val)
+            if(takeCount == -1){
+                table.set(val,1)
+            }else{
+                table.set(val,takeCount+1)
+            }
+        }
+
+        let duplicates = []
+        let unique = []
+        for(let i=0;i<table.table.length;i++){
+            if(table.table[i]){
+                let bucket = table.table[i]
+                for(let [key,value] of bucket){
+                    if(value > 1){
+                        duplicates.push(Number(key))
+                    }
+
+                    if(value == 1){
+                        unique.push(Number(key))
+                    }
+                }
+            }
+        }
+        return {duplicates,unique}
+    }
+
+    removeDuplicatesFromInput(input){
+        const givenInput = Array.isArray(input) ? input : input.split('')
+        const t = new Hashtable(50)
+        for(let val of givenInput){
+            let key = val.toString()
+            let value = t.get(val) 
+            if(value == -1){
+                t.set(key,1)
+            }else{
+                t.set(key,value+1)
+            }
+        }
+
+        let final = []
+        const seen = new Set()
+        for(let i=0;i<t.table.length;i++){
+            if(t.table[i]){
+                for(let [key,value] of t.table[i]){
+                    if(!seen.has(key)){
+                        seen.add(key)
+                        final.push(key)
+                    }
+                }
+            }
+        }
+        return final
+    }
+
+    findDuplicatesFromTable(){
+        let duplicates = []
+        let seen = new Set()
+        for(let i=0;i<this.table.length;i++){
+            let bucket = this.table[i]
+            if(bucket){
+             for(let [key,val] of bucket){
+                if(seen.has(key)){
+                    duplicates.push(key)
+                }else{
+                    seen.add(key)
+                }
+             }
+            }
+        }
+
+        return duplicates
+    }
+
+    removeDuplicatesFromTable(){
+        let seen = new Set()
+        for(let i=0;i<this.table.length;i++){
+            let bucket = this.table[i]
+            let newBucket = []
+            if(bucket){
+                for(let [key,value] of bucket){
+                    if(!seen.has(key)){
+                        seen.add(key)
+                        newBucket.push([key,value])
+                    }
+                }
+            }
+            this.table[i] =  newBucket.length > 0 ? newBucket : undefined
+        }
+    }
+
+    nthMostFrequencey(arr,n){
+        let t = new Hashtable(50)
+        
+        for(let val of arr){
+            let key = val.toString()
+            let value = t.get(key) || 0
+            t.set(key,value+1)
+        }
+
+        let final = []
+
+        for(let i=0;i<t.table.length;i++){
+            let bucket = t.table[i]
+            if(bucket){
+                for(let [key,value] of bucket){
+                    final.push([key,value])
+                }
+            }
+        }
+
+        final.sort((a,b)=>b[1] - a[1])
+
+        return final[n-1] || null
     }
 }
 
-const q = new Queue()
 
-// Empty queue checks
-console.log(q.dequeue())   // -1
-console.log(q.peek())      // -1
-console.log(q.isEmpty())   // true
-console.log(q.print())     // []
+const ht = new Hashtable(10)
 
-// Enqueue elements
-q.enqueue(10)
-q.enqueue(20)
-q.enqueue(30)
+// Basic set & get
+ht.set("a", 1)
+ht.set("b", 2)
+ht.set("c", 3)
 
-console.log(q.peek())      // 10
-console.log(q.print())     // [10, 20, 30]
+console.log(ht.get("a")) // 1
+console.log(ht.get("b")) // 2
+console.log(ht.get("x")) // -1
 
-// Dequeue elements
-console.log(q.dequeue())  // 10
-console.log(q.print())    // [20, 30]
+// Update existing key
+ht.set("a", 100)
+console.log(ht.get("a")) // 100
 
-q.enqueue(40)
-console.log(q.print())    // [20, 30, 40]
+// Collision handling test
+ht.set("ab", 10)
+ht.set("ba", 20) // same hash index
 
-console.log(q.dequeue())  // 20
-console.log(q.dequeue())  // 30
-console.log(q.dequeue())  // 40
+console.log(ht.get("ab")) // 10
+console.log(ht.get("ba")) // 20
 
-// Queue should be empty again
-console.log(q.dequeue())  // -1
-console.log(q.peek())     // -1
-console.log(q.isEmpty())  // true
-console.log(q.print())    // []
+// Remove key
+console.log(ht.remove("b")) // [[ 'b', 2 ]]
+console.log(ht.get("b"))    // -1
+
+// Print table
+ht.print()
+
+// Duplicate & unique from input
+console.log(
+  ht.findDuplicatesFromInputAndUnique(
+    [1,1,1,2,3,3,4,5,5,6]
+  )
+)
+// { duplicates: [1,3,5], unique: [2,4,6] }
+
+// Remove duplicates from input
+console.log(
+  ht.removeDuplicatesFromInput([1,1,2,2,3,4,4,5])
+)
+// ['1','2','3','4','5']
+
+// Frequency test
+console.log(
+  ht.nthMostFrequencey([1,1,2,3,3,3,4,4,5], 2)
+)
+// ['1', 2] OR ['4', 2] depending on order
