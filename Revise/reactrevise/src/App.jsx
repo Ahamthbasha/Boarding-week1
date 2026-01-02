@@ -17,6 +17,10 @@ import Button from './context/Button'
 import LazyLoading from './component/LazyLoading'
 import Timer from './component/Timer'
 import HOC from './component/HOC'
+import RenderProps from './component/RenderProps'
+import List from './component/List'
+import ToDo from './component/ToDo'
+import Logic from './Logical/Logic'
 
 const LazyComponent = lazy(()=>import("./component/LazyLoading"))
 
@@ -49,7 +53,15 @@ const App = () => {
 
       {/* <Timer/> */}
 
-      <HOC />
+      {/* <HOC /> */}
+
+      {/* <RenderProps/> */}
+
+      {/* <List/> */}
+
+      {/* <ToDo/> */}
+
+      <Logic />
     </div>
   )
 }

@@ -13,11 +13,13 @@ const CommonFunction = ({render}) => {
 const RenderProps = () => {
   return (
     <CommonFunction render={(count,increment)=>{
-      return <div>
+      return (
+      <div>
         <h1>Parent</h1>
         <h2>count:{count}</h2>
         <button onClick={increment}>Increment</button>
       </div>
+      )
     }}/>
   )
 }

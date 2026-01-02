@@ -14,7 +14,7 @@ const HOCComponent = (WrappedComponent)=>{
 const Button = ()=>{
     return(
         <div>
-            <button>Click Me</button>
+            <button>Click</button>
         </div>
     )
 }
