@@ -22,3 +22,18 @@ const Button = ()=>{
 const HOC = HOCComponent(Button)
 
 export default HOC
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

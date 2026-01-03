@@ -6,7 +6,7 @@ const CommonFunction = ({render})=>{
     const increment = ()=>{
         setCount((count)=>count+1)
     }
-
+    
     return render(count,increment)
 }
 
@@ -15,7 +15,7 @@ const RenderProps = () => {
     <CommonFunction render={(count,increment)=>{
         return(
             <div>
-                <h1>count is : {count}</h1>
+                <h1>count:{count}</h1>
                 <button onClick={increment}>Increment</button>
             </div>
         )

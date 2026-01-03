@@ -1,84 +1,128 @@
 // 1.what type in input box it will be shown in h1 tag
 
+//USING USE STATE
+
 // import React, { useState } from 'react'
 
 // const Logic = () => {
-//     const [data,setData] = useState('')
+//   const [text,setText] = useState('')
 //   return (
 //     <div>
-//       <input type="text" value={data} onChange={(e)=>setData(e.target.value)}/>
-
-//       <h1>{data}</h1>
+//       <input type="text" value={text} onChange={(e)=>setText(e.target.value)} />
+//       <h1>{text}</h1>      
 //     </div>
 //   )
 // }
 
 // export default Logic
+
+//USING USEREF : IT IS IMPOSSIBLE ONLY USING USEREF TO ACHIEVE SAME BEHAVIOUR BUT WE CAN MAKE IT BY USING THE JS.IT IS CALLED ANTI PATTERN.
+
+// import React, { useEffect, useRef } from 'react'
+
+// const Logic = () => {
+//   const inputRef = useRef(null)
+//   const headingRef = useRef(null)
+
+//   useEffect(()=>{
+//     const inputEl = inputRef.current
+//     if(!inputEl){
+//       return
+//     }
+//     const handler = ()=>{
+//       headingRef.current.innerText = inputEl.value
+//     }
+
+//     inputEl.addEventListener('input',handler)
+
+//     return()=>{
+//       inputEl.removeEventListener('input',handler)
+//     }
+//   },[])
+//   return (
+//     <div>
+//       <input type="text" ref={inputRef} />
+//       <h1 ref={headingRef}></h1>
+//     </div>
+//   )
+// }
+
+// export default Logic
+
 
 // 2.when clicking the button it should show the typed text
 
 // import React, { useState } from 'react'
 
 // const Logic = () => {
-//     const [data,setData] = useState('')
-//     const [visibleMedium,setVisibleMedium] = useState(false)
+//   const [text,setText] = useState('')
+//   const [toggle,setToggle] = useState(false)
 
-//     const changeVisibleMedium = ()=>{
-//         setVisibleMedium((visibleMedium)=>!visibleMedium)
-//     }
+//   const valueSet = (e)=>{
+//     setText(e.target.value)
+//   }
+
+//   const changeToggle = ()=>{
+//     setToggle((toggle)=>!toggle)
+//   }
+
 //   return (
 //     <div>
-//       {visibleMedium && <h1>{data}</h1>}
-
-//       <input type="text" value={data} onChange={(e)=>setData(e.target.value)} />
-
-//       <button onClick={changeVisibleMedium}>show - unshow</button>
+//       {toggle && <h1>{text}</h1>} 
+//       <input type="text" value={text} onChange={valueSet} />
+//       <button onClick={changeToggle}>See Content In H1 Tag</button>   
 //     </div>
 //   )
 // }
 
 // export default Logic
+
 
 
 //3.create two component in child component create a input box and in parent component create a h1 tag.When you type on input box it should reflect on h1
 
 // import React, { useState } from 'react'
 
-// const ChildComponent = ({setData})=>{
-//     return(
-//         <input type="text" onChange={(e)=>setData(e.target.value)}/> 
-//     )
+// const ChildComponent = ({setText})=>{
+//   return(
+//     <div>
+//       <input type="text" onChange={(e)=>setText(e.target.value)} />
+//     </div>
+//   )
 // }
 
 // const Logic = () => {
-//     const [data,setData] = useState('')
+//   const [text,setText] = useState('')
 //   return (
 //     <div>
-//       <h1>{data}</h1>
-//       <ChildComponent setData={setData}/>
+//       <ChildComponent setText={setText}/>
+//       <h1>{text}</h1>
 //     </div>
 //   )
 // }
 
 // export default Logic
+
 
 //4.prevent right click of the button
 
 // import React from 'react'
 
 // const Logic = () => {
-//     const handlePreventRight = (e)=>{
-//         e.preventDefault()
-//         alert('Right Click Disabled')
-//     }
+
+//   const preventRightClick = (e)=>{
+//     e.preventDefault()
+//     alert("right click disabled")
+//   }
 //   return (
 //     <div>
-//       <button onContextMenu={handlePreventRight}>click right side button</button>
+//       <button onContextMenu={preventRightClick}>Click Right button</button>
 //     </div>
 //   )
 // }
 
 // export default Logic
+
 
 
 //5.prevent left click
@@ -86,18 +130,20 @@
 // import React from 'react'
 
 // const Logic = () => {
-//     const preventLeftClick = (e)=>{
-//         e.preventDefault()
-//         alert("left click blocked")
-//     }
+//   const preventLeftClick = (e)=>{
+//     e.preventDefault()
+//     alert("disabled left click")
+//   }
+
 //   return (
 //     <div>
-//         <button onClick={preventLeftClick}>click left</button>  
+//       <button onClick={preventLeftClick}>click left button</button>      
 //     </div>
 //   )
 // }
 
 // export default Logic
+
 
 
 //6.prevent entire page accessing right click
@@ -106,20 +152,21 @@
 
 // const Logic = () => {
 
-//     useEffect(()=>{
-//         const preventRightClick = (e)=>{
-//             e.preventDefault()
-//             alert("Right Click Disabled")
-//         }
-//         document.addEventListener('contextmenu',preventRightClick)
+//   useEffect(()=>{
+//     const handler =  (e)=>{
+//       e.preventDefault()
+//       alert("right click disabled")
+//     }
 
-//         return()=>{
-//             document.removeEventListener('contextmenu',preventRightClick)
-//         }
-//     },[])
+//     document.addEventListener('contextmenu',handler)
+
+//     return()=>{
+//       document.removeEventListener('contextmenu',handler)
+//     }
+//   },[])
 //   return (
 //     <div>
-//       <h1>Right click disabled</h1>
+//       <h1>Right click it wont work</h1>
 //     </div>
 //   )
 // }
@@ -129,17 +176,18 @@
 
 // 7.create a copy to clipboard button
 
-import React, { useRef } from 'react'
+import React, { useState } from 'react'
 
 const Logic = () => {
-    const inputRef = useRef()
-    const copy = ()=>{
-        navigator.clipboard.writeText(inputRef.current.value)
-    }
+  const [value,setValue] = useState('')
+
+  const copyToClipboard = ()=>{
+    navigator.clipboard.writeText(value)
+  }
   return (
     <div>
-        <input type="text" ref={inputRef} />
-      <button onClick={copy}>Copy to clipboard button</button>
+      <input type="text" value={value} onChange={(e)=>setValue(e.target.value)}/>
+      <button onClick={copyToClipboard}>copy to clipboard</button>
     </div>
   )
 }
