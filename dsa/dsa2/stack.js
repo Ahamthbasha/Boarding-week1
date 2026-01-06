@@ -510,7 +510,7 @@ class StackBasedQueue{
         if(this.isEmpty()){
             return null
         }else{
-            this.queue.dequeue()
+            return this.queue.dequeue()
         }
     }
 
