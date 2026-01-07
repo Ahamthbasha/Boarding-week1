@@ -1602,3 +1602,35 @@
 // ) // null
 
 
+// let arr = [7, 10, 4, 3, 20, 15]
+// let k = 2
+
+// function quickSelect(arr,k){
+//     if(arr.length == 0){
+//         return arr[0]
+//     }
+
+//     let pivot = arr[arr.length-1]
+//     let leftArr = []
+//     let rightArr = []
+
+//     for(let i=0;i<arr.length-1;i++){
+//         if(arr[i] < pivot){
+//             leftArr.push(arr[i])
+//         }else{
+//             rightArr.push(arr[i])
+//         }
+//     }
+
+//     if(leftArr.length == k-1){
+//         return pivot
+//     }
+//     else if(leftArr.length >= k){
+//         return quickSelect(leftArr,k)
+//     }
+//     else{
+//         return quickSelect(rightArr,k-leftArr.length-1)
+//     }
+// }
+
+// console.log(quickSelect(arr,k))
