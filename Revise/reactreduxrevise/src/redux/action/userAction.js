@@ -26,7 +26,7 @@ export function userError(error){
 export const fetchUser = ()=>{
     return async(dispatch)=>{
         try {
-            dispatch(userList())
+            dispatch(userRequest())
             const response = await fetch(`https://jsonplaceholder.typicode.com/users`)
             const result = await response.json()
             dispatch(userList(result))

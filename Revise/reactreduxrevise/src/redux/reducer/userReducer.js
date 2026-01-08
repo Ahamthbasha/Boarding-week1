@@ -11,9 +11,9 @@ const userReducer = (state = initialState,action)=>{
         case USER_REQUEST:
             return {...state,loading:true}
         case USERLIST_FETCHED:
-            return {...state,users:action.payload}
+            return {...state,loading:false,users:action.payload,error:''}
         case USER_REJECTED:
-            return {...state,error:action.payload}
+            return {...state,loading:false,users:[],error:action.payload}
         default:
             return state
     }
