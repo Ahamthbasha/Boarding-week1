@@ -3,6 +3,9 @@ import HOC from './component/HOC'
 import RenderProps from './component/RenderProps'
 import Cake from './component/Cake'
 import User from './component/User'
+import CakeSComp from './component/CakeSComp'
+import UserSComp from './component/UserSComp'
+import Counter from './component/Counter'
 
 const App = () => {
   return (
@@ -11,7 +14,12 @@ const App = () => {
       {/* <RenderProps /> */}
 
       {/* <Cake /> */}
-      <User />
+      {/* <User /> */}
+
+      {/* <CakeSComp/> */}
+      {/* <UserSComp /> */}
+
+      <Counter />
     </div>
   )
 }
