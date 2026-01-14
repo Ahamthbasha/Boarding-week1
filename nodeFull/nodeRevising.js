@@ -176,24 +176,30 @@
 
 // let arr = [1,2,3,5]
 
-let arr = [1,0,3,4]
+// let arr = [1,0,3,4]
 
-let min = Math.min(...arr)
-let max = Math.max(...arr)
+// let min = Math.min(...arr)
+// let max = Math.max(...arr)
 
-let missingNo = null
+// let missingNo = null
 
-for(let i=min;i<=max;i++){
-    let take = i
-    let checkHasOrNot = false
-    for(let j=0;j<arr.length;j++){
-        if(arr[j] == take){
-            checkHasOrNot = true
-        }
-    }
-    if(!checkHasOrNot){
-        missingNo = take
-    }
-}
+// for(let i=min;i<=max;i++){
+//     let take = i
+//     let checkHasOrNot = false
+//     for(let j=0;j<arr.length;j++){
+//         if(arr[j] == take){
+//             checkHasOrNot = true
+//         }
+//     }
+//     if(!checkHasOrNot){
+//         missingNo = take
+//     }
+// }
 
-console.log(missingNo)
+// console.log(missingNo)
+
+
+process.on('message',(msg)=>{
+    console.log("child received message",msg)
+    process.send("hello parent")
+})

@@ -1,9 +1,12 @@
 {
   "scripts": {
-    "dev":"nodemon nodeRevising.js"
+    "start": "nodemon allPractical.js",
+    "dev": "nodemon allNode.js"
   },
   "dependencies": {
     "express": "^5.2.1",
+    "mongoose": "^9.1.3",
     "nodemon": "^3.1.11"
-  }
+  },
+  "type": "module"
 }
