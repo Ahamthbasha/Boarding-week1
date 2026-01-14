@@ -1,38 +1,72 @@
-// import React from 'react'
-// import Usestate from './Component/Usestate'
-// import UseEffect from './Component/UseEffect'
-// import UseRef from './Component/UseRef'
-// import ParentToChild from './Component/ParentToChild'
-// import ChildToParent from './Component/ChildToParent'
-// import ForwardRef from './Component/ForwardRef'
-// import RenderProps from './Component/RenderProps'
-// import List from './Component/List'
-// import Customhook from './Component/Customhook'
-// import ConditionRender from './Component/ConditionRender'
-// import HOC from './Component/HOC'
+import React from 'react'
+import Usestate from './Component/Usestate'
+import UseEffect from './Component/UseEffect'
+import UseRef from './Component/UseRef'
+import ParentToChild from './Component/ParentToChild'
+import ChildToParent from './Component/ChildToParent'
+import ForwardRef from './Component/ForwardRef'
+import RenderProps from './Component/RenderProps'
+import List from './Component/List'
+import Customhook from './Component/Customhook'
+import ConditionRender from './Component/ConditionRender'
+import HOC from './Component/HOC'
+import Timer from './Component/Timer'
+import UseMemo from './Component/UseMemo'
+import UseCallback from './Component/UseCallback'
+import ReactMemo from './Component/ReactMemo'
+import ContextCreation from './context/ContextCreation'
+import Input from './context/Input'
+import Button from './context/Button'
+import UseReducer from './Component/UseReducer'
+import { lazy } from 'react'
+import { Suspense } from 'react'
+import InputReflect from './Logical/InputReflect'
+import PreventLeftClick from './Logical/PreventLeftClick'
+import PreventRightClick from './Logical/PreventRightClick'
+import CopyToClipboard from './Logical/CopyToClipboard'
+import DigitToWordConverter from './Logical/DigitToWordConverter'
+import Todo from './Logical/Todo'
 
-// const App = () => {
+const Lazy = lazy(()=>import('./Component/LazyComponent'))
 
-//   return (
-//     <div>
-//       {/* <Usestate/> */}
-//       {/* <UseEffect/> */}
-//       {/* <UseRef /> */}
-//       {/* <ParentToChild /> */}
-//       {/* <ChildToParent /> */}
-//       {/* <ForwardRef /> */}
-//       {/* <RenderProps/> */}
-//       {/* <List /> */}
-//       {/* <Customhook /> */}
-//       {/* <ConditionRender /> */}
-//       {/* <HOC /> */}
+const App = () => {
 
+  return (
+    <div>
+      {/* <Usestate/> */}
+      {/* <UseEffect/> */}
+      {/* <UseRef /> */}
+      {/* <ParentToChild /> */}
+      {/* <ChildToParent /> */}
+      {/* <ForwardRef /> */}
+      {/* <RenderProps/> */}
+      {/* <List /> */}
+      {/* <Customhook /> */}
+      {/* <ConditionRender /> */}
+      {/* <HOC /> */}
+      {/* <Timer/> */}
+      {/* <UseMemo /> */}
+      {/* <UseCallback /> */}
+      {/* <ReactMemo/> */}
+      {/* <ContextCreation>
+        <Input/>
+        <Button/>
+      </ContextCreation> */}
+      {/* <UseReducer/> */}
+      {/* <Suspense fallback={<p>Loading...</p>}>
+      <Lazy />
+      </Suspense> */}
+      {/* <InputReflect/> */}
+      {/* <PreventLeftClick /> */}
+      {/* <PreventRightClick/> */}
+      {/* <CopyToClipboard /> */}
+      {/* <DigitToWordConverter/> */}
+      <Todo/>
+    </div>
+  )
+}
 
-//     </div>
-//   )
-// }
-
-// export default App
+export default App
 
 //router related thing
 
