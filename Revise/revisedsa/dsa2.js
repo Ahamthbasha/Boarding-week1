@@ -1157,7 +1157,7 @@
 
 // console.log(result)
 
-//implement queue by using stack
+// implement queue by using stack
 
 // class Stack{
 //     constructor(){
