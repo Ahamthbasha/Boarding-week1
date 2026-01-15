@@ -1397,134 +1397,415 @@
 
 //implement queue using stack
 
-class Stack{
-    constructor(){
-        this.items = []
-    }
+// class Stack{
+//     constructor(){
+//         this.items = []
+//     }
 
-    isEmpty(){
-        return this.items.length == 0
-    }
+//     isEmpty(){
+//         return this.items.length == 0
+//     }
 
-    getSize(){
-        return this.items.length
-    }
+//     getSize(){
+//         return this.items.length
+//     }
 
-    push(value){
-        this.items.push(value)
-    }
+//     push(value){
+//         this.items.push(value)
+//     }
 
-    pop(){
-        if(this.isEmpty()){
-            return null
-        }
+//     pop(){
+//         if(this.isEmpty()){
+//             return null
+//         }
 
-        return this.items.pop()
-    }
+//         return this.items.pop()
+//     }
 
-    peek(){
-        if(this.isEmpty()){
-            return null
-        }
-        return this.items[this.items.length-1]
-    }
-}
+//     peek(){
+//         if(this.isEmpty()){
+//             return null
+//         }
+//         return this.items[this.items.length-1]
+//     }
+// }
 
-class Queue{
-    constructor(){
-        this.S1 = new Stack()
-        this.S2 = new Stack()
-    }
+// class Queue{
+//     constructor(){
+//         this.S1 = new Stack()
+//         this.S2 = new Stack()
+//     }
 
-    isEmpty(){
-        return this.S1.isEmpty() && this.S2.isEmpty()
-    }
+//     isEmpty(){
+//         return this.S1.isEmpty() && this.S2.isEmpty()
+//     }
 
-    getSize(){
-        return this.S1.getSize() + this.S2.getSize()
-    }
+//     getSize(){
+//         return this.S1.getSize() + this.S2.getSize()
+//     }
 
-    enqueue(value){
-        this.S1.push(value)
-    }
+//     enqueue(value){
+//         this.S1.push(value)
+//     }
 
-    dequeue(){
-        if(this.isEmpty()){
-            return null
-        }
-        if(this.S2.isEmpty()){
-            while(!this.S1.isEmpty()){
-                this.S2.push(this.S1.pop())
-            }
-        }
+//     dequeue(){
+//         if(this.isEmpty()){
+//             return null
+//         }
+//         if(this.S2.isEmpty()){
+//             while(!this.S1.isEmpty()){
+//                 this.S2.push(this.S1.pop())
+//             }
+//         }
 
-        return this.S2.pop()
-    }
+//         return this.S2.pop()
+//     }
 
-    peek(){
-        if(this.isEmpty()){
-            return null
-        }
-        if(this.S2.isEmpty()){
-            while(!this.S1.isEmpty()){
-                this.S2.push(this.S1.pop())
-            }
-        }
-        return this.S2.peek()
-    }
+//     peek(){
+//         if(this.isEmpty()){
+//             return null
+//         }
+//         if(this.S2.isEmpty()){
+//             while(!this.S1.isEmpty()){
+//                 this.S2.push(this.S1.pop())
+//             }
+//         }
+//         return this.S2.peek()
+//     }
     
-    print(){
-        let s2Element = [...this.S2.items].reverse()
-        let s1Element = [...this.S1.items]
+//     print(){
+//         let s2Element = [...this.S2.items].reverse()
+//         let s1Element = [...this.S1.items]
 
-        return [...s2Element,...s1Element]
-    }
-}
-const q = new Queue()
+//         return [...s2Element,...s1Element]
+//     }
+// }
+// const q = new Queue()
 
-console.log("Initial isEmpty:", q.isEmpty())        // true
-console.log("Initial size:", q.getSize())           // 0
-console.log("Dequeue on empty:", q.dequeue())       // null
-console.log("Peek on empty:", q.peek())             // null
-console.log("Print on empty:", q.print())           // []
+// console.log("Initial isEmpty:", q.isEmpty())        // true
+// console.log("Initial size:", q.getSize())           // 0
+// console.log("Dequeue on empty:", q.dequeue())       // null
+// console.log("Peek on empty:", q.peek())             // null
+// console.log("Print on empty:", q.print())           // []
 
-// Enqueue operations
-q.enqueue(10)
-q.enqueue(20)
-q.enqueue(30)
+// // Enqueue operations
+// q.enqueue(10)
+// q.enqueue(20)
+// q.enqueue(30)
 
-console.log("\nAfter enqueue 10,20,30")
-console.log("isEmpty:", q.isEmpty())                // false
-console.log("Size:", q.getSize())                   // 3
-console.log("Print:", q.print())                    // [10, 20, 30]
-console.log("Peek:", q.peek())                      // 10
-console.log("Print after peek:", q.print())         // [10, 20, 30]
+// console.log("\nAfter enqueue 10,20,30")
+// console.log("isEmpty:", q.isEmpty())                // false
+// console.log("Size:", q.getSize())                   // 3
+// console.log("Print:", q.print())                    // [10, 20, 30]
+// console.log("Peek:", q.peek())                      // 10
+// console.log("Print after peek:", q.print())         // [10, 20, 30]
 
-// Dequeue operations
-console.log("\nDequeue:", q.dequeue())              // 10
-console.log("Print:", q.print())                    // [20, 30]
-console.log("Size:", q.getSize())                   // 2
+// // Dequeue operations
+// console.log("\nDequeue:", q.dequeue())              // 10
+// console.log("Print:", q.print())                    // [20, 30]
+// console.log("Size:", q.getSize())                   // 2
 
-console.log("Dequeue:", q.dequeue())                // 20
-console.log("Print:", q.print())                    // [30]
-console.log("Size:", q.getSize())                   // 1
+// console.log("Dequeue:", q.dequeue())                // 20
+// console.log("Print:", q.print())                    // [30]
+// console.log("Size:", q.getSize())                   // 1
 
-// Mix enqueue & dequeue
-q.enqueue(40)
-q.enqueue(50)
+// // Mix enqueue & dequeue
+// q.enqueue(40)
+// q.enqueue(50)
 
-console.log("\nAfter enqueue 40,50")
-console.log("Print:", q.print())                    // [30, 40, 50]
-console.log("Size:", q.getSize())                   // 3
-console.log("Peek:", q.peek())                      // 30
+// console.log("\nAfter enqueue 40,50")
+// console.log("Print:", q.print())                    // [30, 40, 50]
+// console.log("Size:", q.getSize())                   // 3
+// console.log("Peek:", q.peek())                      // 30
 
-console.log("Dequeue:", q.dequeue())                // 30
-console.log("Dequeue:", q.dequeue())                // 40
-console.log("Print:", q.print())                    // [50]
-console.log("Size:", q.getSize())                   // 1
+// console.log("Dequeue:", q.dequeue())                // 30
+// console.log("Dequeue:", q.dequeue())                // 40
+// console.log("Print:", q.print())                    // [50]
+// console.log("Size:", q.getSize())                   // 1
 
-// Empty again
-console.log("\nFinal Dequeue:", q.dequeue())        // 50
-console.log("Final Dequeue:", q.dequeue())          // null
-console.log("Final isEmpty:", q.isEmpty())          // true
-console.log("Final Print:", q.print())              // []
+// // Empty again
+// console.log("\nFinal Dequeue:", q.dequeue())        // 50
+// console.log("Final Dequeue:", q.dequeue())          // null
+// console.log("Final isEmpty:", q.isEmpty())          // true
+// console.log("Final Print:", q.print())              // []
+
+
+// class HashTable{
+//     constructor(size){
+//         this.table = new Array(size)
+//         this.size = size
+//     }
+
+//     hashKey(key){
+//         let total = 0
+
+//         for(let i=0;i<key.length;i++){
+//             total += key.charCodeAt(i)
+//         }
+
+//         return total % this.size
+//     }
+
+//     set(key,value){
+//         let index = this.hashKey(key)
+//         this.table[index] = value
+//     }
+
+//     get(key){
+//         let index = this.hashKey(key)
+//         if(index != -1){
+//             return this.table[index]
+//         }else{
+//             return 'no key'
+//         }
+//     }
+
+//     remove(key){
+//         let index = this.hashKey(key)
+//         if(index != -1){
+//             this.table[index] = undefined
+//             return true
+//         }else{
+//             return false
+//         }
+//     }
+
+//     print(){
+//         for(let i=0;i<this.table.length;i++){
+//             if(this.table[i]){
+//                 console.log(i,this.table[i])
+//             }
+//         }
+//     }
+// }
+
+// const ht = new HashTable(10)
+
+// // Insert values
+// ht.set("name", "Alice")
+// ht.set("age", 25)
+// ht.set("city", "Delhi")
+
+// console.log("Get name:", ht.get("name"))   // Alice
+// console.log("Get age:", ht.get("age"))     // 25
+// console.log("Get city:", ht.get("city"))   // Delhi
+// console.log("Get unknown:", ht.get("job")) // undefined
+
+// // Remove a key
+// console.log("Remove age:", ht.remove("age")) // true
+// console.log("Get age after remove:", ht.get("age")) // undefined
+
+// // Reinsert
+// ht.set("age", 30)
+// console.log("Get age after reinsert:", ht.get("age")) // 30
+
+// // Print table
+// console.log("\nHash Table Contents:")
+// ht.print()
+
+//hashtable with separate chaining
+
+// class Hashtable{
+//     constructor(size){
+//         this.table = new Array(size)
+//         this.size = size
+//     }
+
+//     hashKey(key){
+//         let total = 0
+
+//         for(let i=0;i<key.length;i++){
+//             total += key.charCodeAt(i)
+//         }
+
+//         return total % this.size
+//     }
+
+//     set(key,value){
+//         let index = this.hashKey(key)
+
+//         let bucket = this.table[index]
+
+//         if(!bucket){
+//             this.table[index] = [[key,value]]
+//         }else{
+//             let chainIndex = bucket.find((val)=>val[0]==key)
+
+//             if(chainIndex){
+//                 chainIndex[1] = value
+//             }else{
+//                 bucket.push([key,value])
+//             }
+//         }
+//     }
+
+//     get(key){
+//         let index = this.hashKey(key)
+//         let bucket = this.table[index]
+//         if(bucket){
+//             let checkElement = bucket.find((val)=>val[0]==key)
+//             return checkElement ? checkElement[1] : null
+//         }else{
+//             return null
+//         }
+//     }
+
+//     remove(key){
+//         let index = this.hashKey(key)
+//         let bucket = this.table[index]
+
+//         if(bucket){
+//             let keyIndex = bucket.findIndex((val)=>val[0]==key)
+
+//             if(keyIndex != -1){
+//                 bucket.splice(keyIndex,1)
+//                 return true
+//             }
+//         }else{
+//             return false
+//         }
+//     }
+
+//     print(){
+//         for(let i=0;i<this.table.length;i++){
+//             if(this.table[i]){
+//                 console.log(i,this.table[i])
+//             }
+//         }
+//     }
+
+//     findDuplicatesFromInput(input){
+//         let given = Array.isArray(input) ? input : input.split("")
+
+//         let temp = new Hashtable(50)
+//         for(let val of given){
+//             let key = val.toString()
+//             let getCount = temp.get(key) || 0
+//             temp.set(key,getCount+1)
+//         }
+//         let duplicates = []
+//         let unique = []
+//         for(let i=0;i<temp.table.length;i++){
+//             let bucket = temp.table[i]
+//             if(bucket){
+//                 for(let [key,value] of bucket){
+//                     if(value > 1){
+//                         duplicates.push(key)
+//                     }
+
+//                     if(value == 1){
+//                         unique.push(key)
+//                     }
+//                 }
+//             }
+//         }
+
+//         return Array.isArray(input) ? {duplicates,unique} : {duplicates:duplicates.join(""),unique:unique.join("")}
+//     }
+
+//     removeDuplicatesFromInput(given){
+//         let input = Array.isArray(given) ? given : given.split("")
+//         let temp = new Hashtable(50)
+//         for(let val of input){
+//             let key = val.toString()
+//             let count = temp.get(key) || 0
+//             temp.set(key,count+1)
+//         }
+
+//         let seen = new Set()
+//         let result = []
+//         for(let i=0;i<temp.table.length;i++){
+//             let bucket = temp.table[i]
+//             if(bucket){
+//                 for(let [key,value] of bucket){
+//                     if(!seen.has(key)){
+//                         seen.add(key)
+//                         result.push(key)
+//                     }
+//                 }
+//             }
+//         }
+//         return Array.isArray(given) ? result : result.join("")
+//     }
+
+//     removeDuplicatesFromTable(){
+//         for(let i=0;i<this.table.length;i++){
+//             let bucket = this.table[i]
+//             if(bucket){
+//                 let newBucket = []
+//                 let seen = new Set()
+//                 for(let [key,value] of bucket){
+//                     if(!seen.has(key)){
+//                         seen.add(key)
+//                         newBucket.push([key,value])
+//                     }
+//                 }
+//                 this.table[i] = newBucket.length > 0 ? newBucket : undefined
+//             }
+//         }
+//     }
+
+//     findDupicatesFromTable(){
+//         let duplicates = []
+//         for(let i=0;i<this.table.length;i++){
+//             let bucket = this.table[i]
+//             if(bucket){
+//                 for(let [key,value] of bucket){
+//                     if(value > 1){
+//                         duplicates.push(key)
+//                     }
+//                 }
+//             }
+//         }
+//         return duplicates
+//     }
+
+//     nthMostFrequency(arr,n){
+//         let temp = new Hashtable(50)
+
+//         for(let val of arr){
+//             let key = val.toString()
+//             let count = temp.get(key) || 0
+//             temp.set(key,count+1)
+//         }
+
+//         let result = []
+
+//         for(let i=0;i<temp.table.length;i++){
+//             let bucket = temp.table[i]
+//             if(bucket){
+//                 for(let [key,value] of bucket){
+//                     result.push([key,value])
+//                 }
+//             }
+//         }
+
+//         result.sort((a,b)=>b[1]-a[1])
+
+//         if(n<1 || n > result.length){
+//             return null
+//         }
+
+//         return result[n-1][0]
+//     }
+// }
+
+// const ht = new Hashtable(10)
+
+// ht.set("a", 1)
+// ht.set("a", 2)
+// console.log(ht.get("a")) // 2
+
+// console.log(ht.get("x")) // null
+// console.log(ht.remove("x")) // false
+
+// console.log(ht.findDuplicatesFromInput("banana"))
+// // { duplicates: "an", unique: "b" }
+
+// console.log(ht.removeDuplicatesFromInput("banana"))
+// // Order issue in current version
+
+// console.log(ht.nthMostFrequency(["a","b","a","c","b","a"], 1)) // "a"
+// console.log(ht.nthMostFrequency(["a","b"], 3)) // null (after fix)
+
+
