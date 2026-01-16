@@ -794,3 +794,176 @@
 // }
 
 // console.log(checkDescendingArr([100,90,80,10,0,1000,200]))
+
+
+//linkedlist mergeSort
+
+class Node{
+    constructor(value){
+        this.value = value
+        this.next = null
+    }
+}
+
+class LinkedList{
+    constructor(){
+        this.head = null
+        this.size = 0
+    }
+
+    isEmpty(){
+        return this.size == 0
+    }
+
+    getSize(){
+        return this.size
+    }
+
+    prepend(value){
+        const node = new Node(value)
+        node.next = this.head
+        this.head = node
+        this.size++
+    }
+
+    getMiddleNode(head){
+        let slow = head
+        let fast = head.next
+
+        while(fast && fast.next){
+            slow = slow.next
+            fast = fast.next.next
+        }
+
+        return slow
+    }
+
+    mergeSort(){
+        this.head = this.mergeLL(this.head)
+    }
+
+    mergeLL(head){
+        if(!head || !head.next){
+            return head
+        }
+
+        let middle = this.getMiddleNode(head)
+        let nextToMiddle = middle.next
+        middle.next = null
+        
+        let left = this.mergeLL(head)
+        let right = this.mergeLL(nextToMiddle)
+
+        return this.merge(left,right)
+    }
+
+    merge(a,b){
+        if(!a){
+            return b
+        }
+
+        if(!b){
+            return a
+        }
+
+        if(a.value <= b.value){
+            a.next =  this.merge(a.next,b)
+            return a
+        }
+        else{
+            b.next = this.merge(a,b.next)
+            return b
+        }
+    }
+
+    bubbleSort(){
+        let swapped = true
+
+        while(swapped){
+            swapped = false
+            let cur = this.head
+            while(cur && cur.next){
+                if(cur.value > cur.next.value){
+                    [cur.value,cur.next.value] = [cur.next.value,cur.value]
+                    swapped = true
+                }
+                cur = cur.next
+            }
+        }
+    }
+
+    print(){
+        if(this.isEmpty()){
+            return 'empty'
+        }
+        else{
+            let list = ''
+            let temp = this.head
+
+            while(temp){
+                list += temp.value + '->'
+                temp = temp.next
+            }
+
+            list +='null'
+            return list
+        }
+    }
+}
+
+const list1 = new LinkedList()
+list1.prepend(3)
+list1.prepend(1)
+list1.prepend(4)
+list1.prepend(2)
+
+console.log("Before mergeSort:", list1.print())
+list1.mergeSort()
+console.log("After mergeSort :", list1.print())
+
+const list2 = new LinkedList()
+list2.prepend(4)
+list2.prepend(3)
+list2.prepend(2)
+list2.prepend(1)
+
+console.log("Before mergeSort:", list2.print())
+list2.mergeSort()
+console.log("After mergeSort :", list2.print())
+
+
+const list3 = new LinkedList()
+list3.prepend(1)
+list3.prepend(2)
+list3.prepend(3)
+list3.prepend(4)
+
+console.log("Before bubbleSort:", list3.print())
+list3.bubbleSort()
+console.log("After bubbleSort :", list3.print())
+
+const list4 = new LinkedList()
+list4.prepend(3)
+list4.prepend(1)
+list4.prepend(2)
+list4.prepend(3)
+list4.prepend(1)
+
+console.log("Before mergeSort:", list4.print())
+list4.mergeSort()
+console.log("After mergeSort :", list4.print())
+
+
+const list5 = new LinkedList()
+list5.prepend(10)
+
+console.log("Before mergeSort:", list5.print())
+list5.mergeSort()
+console.log("After mergeSort :", list5.print())
+
+
+const list6 = new LinkedList()
+
+console.log("Before bubbleSort:", list6.print())
+list6.bubbleSort()
+console.log("After bubbleSort :", list6.print())
