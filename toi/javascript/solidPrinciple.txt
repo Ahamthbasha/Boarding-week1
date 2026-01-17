@@ -1,0 +1,297 @@
+// 1.single responsiblity principle
+
+Each class or module should perform one responsibility or one task.
+
+Ex:
+class UserService {
+  createUser(user) {
+    // create user
+  }
+
+  saveToDatabase(user) {
+    // DB logic
+  }
+
+  sendEmail(user) {
+    // email logic
+  }
+}
+
+
+convert this into to SRP
+
+class CreateUserService{
+    createUser(user){
+
+    }
+}
+
+class SaveUserService{
+    saveUserDB(user){
+
+    }
+}
+
+class SendEmailService{
+    sendEmail(user){
+
+    }
+}
+
+
+2.OPEN CLOSE PRINCIPLE
+
+a class should be open for extension but closed for modification.
+
+🔹 What is the Strategy Pattern?
+
+Strategy Pattern defines a family of algorithms, encapsulates each one, and makes them interchangeable at runtime.
+
+In simple words:
+
+Put different behaviors in separate classes
+
+Use composition instead of if/else
+
+Switch behavior without changing the main class
+
+VIOLATES OCP:
+
+class PaymentService {
+  pay(method, amount) {
+    if (method === "card") {
+      console.log("Paid with card");
+    } else if (method === "upi") {
+      console.log("Paid with UPI");
+    }
+  }
+}
+
+
+FOLLOW OCP:
+
+class PaymentService{
+    constructor(paymentMethod){
+        this.paymentMethod = paymentMethod
+    }
+
+    pay(amount){
+        this.paymentMethod.pay(amount)
+    }
+}
+
+class CardPaymentService{
+    pay(amount){
+        console.log(`${amount} paid using card`)
+    }
+}
+
+class UpiPaymentService{
+    pay(amount){
+        console.log(`${amount} is paid by Upi`)
+    }
+}
+
+const payToUser = new PaymentService(new CardPaymentService())
+
+payToUser.pay(1000)
+
+3.LSP(LIBSKOV SUBSTUTION PRINCIPLE)
+
+object of a subclass should be replaceable by the object of the superclass without breaking the program.
+
+❌ LSP VIOLATION (Classic Interview Example)
+Rectangle–Square Problem
+class Rectangle {
+    setWidth(w) {
+        this.width = w;
+    }
+
+    setHeight(h) {
+        this.height = h;
+    }
+
+    getArea() {
+        return this.width * this.height;
+    }
+}
+
+class Square extends Rectangle {
+    setWidth(w) {
+        this.width = w;
+        this.height = w;
+    }
+
+    setHeight(h) {
+        this.width = h;
+        this.height = h;
+    }
+}
+
+❌ Why LSP is violated
+function calculateArea(rect) {
+    rect.setWidth(5);
+    rect.setHeight(10);
+    return rect.getArea();
+}
+
+calculateArea(new Rectangle()); // 50 ✅
+calculateArea(new Square());    // 100 ❌
+
+
+👉 Square cannot replace Rectangle safely
+
+FOLLOWS LIBSKOV SUBSTUTION PRINCIPLE:
+
+class Shape{
+
+    getArea(){
+        
+    }
+}
+
+class Rectange extends Shape{
+    constructor(width,height){
+        super()
+        this.width = width
+        this.height = height
+    }
+
+    getArea(){
+        return this.width * this.height
+    }
+}
+
+class Square extends Shape{
+    constructor(side){
+        super()
+        this.side = side
+    }
+
+    getArea(){
+        return this.side * this.side
+    }
+}
+
+function calculateArea(shape){
+    return shape.getArea()
+}
+
+console.log(calculateArea(new Square(10)))
+
+
+DIFFERENCE BETWEEN OCP AND LSP
+
+OCP is about how the system grows, LSP is about whether inheritance is safe while growing.
+
+4.I — Interface Segregation Principle (ISP)
+Definition
+
+Clients should not be forced to depend on methods they do not use.
+
+JavaScript doesn’t have interfaces, but we apply this via small abstractions.
+
+❌ Bad Example
+
+class Worker {
+  work() {}
+  eat() {}
+}
+
+class Robot extends Worker {
+  eat() {
+    throw new Error("Robots don't eat");
+  }
+}
+
+
+❌ Robot is forced to implement eat()
+
+✅ Good Example
+
+class Workable {
+  work() {}
+}
+
+class Eatable {
+  eat() {}
+}
+
+class Human extends Workable {
+  eat() {
+    console.log("Eating");
+  }
+}
+
+class Robot extends Workable {
+  work() {
+    console.log("Working");
+  }
+}
+
+🔑 ISP Rule
+
+Prefer many small interfaces over one large interface.
+
+5.D — Dependency Inversion Principle (DIP)
+Definition
+
+High-level modules should not depend on low-level modules.
+Both should depend on abstractions.
+
+This is THE MOST IMPORTANT SOLID principle.
+
+❌ Bad Example
+class MySQLDatabase {
+  connect() {
+    console.log("Connected to MySQL");
+  }
+}
+
+class UserService {
+  constructor() {
+    this.db = new MySQLDatabase();
+  }
+}
+
+Problem
+
+UserService is tightly coupled to MySQL
+
+Switching DB breaks everything
+
+✅ Good Example
+class Database {
+  connect() {}
+}
+
+class MySQLDatabase extends Database {
+  connect() {
+    console.log("Connected to MySQL");
+  }
+}
+
+class MongoDatabase extends Database {
+  connect() {
+    console.log("Connected to MongoDB");
+  }
+}
+
+class UserService {
+  constructor(database) {
+    this.db = database;
+  }
+
+  init() {
+    this.db.connect();
+  }
+}
+
+Usage
+const db = new MongoDatabase();
+const userService = new UserService(db);
+userService.init();
+
+🔑 DIP Rule
+
+Depend on abstractions, not concrete implementations
