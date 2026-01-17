@@ -36,8 +36,6 @@
 //   ]
 // }
 
-
-
 // let result = []
 // for(let key in data){
 //     for( let val of data[key]){
@@ -77,8 +75,6 @@
 //         map.set(val.name,val.qty)
 //     }
 // }
-
-
 
 // for(let [name,qty] of map){
 //     result.push({name:name,qty:qty})
