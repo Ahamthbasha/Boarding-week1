@@ -783,29 +783,42 @@ let  obj = {'newObj.obj2.obj5.one':1,'obj3.obj4.two':2}
 // };
 
 let result = {}
+
 for(let key in obj){
     let take = key.split(".")
-    let current = result
+    let part = result
     for(let i=0;i<take.length;i++){
-        let part = take[i]
         if(i == take.length-1){
-            current[part] = obj[key]
+            part[take[i]] = obj[key]
         }
         else{
-            if(!current[part]){
-                current[part] = {}
+            if(!part[take[i]]){
+                part[take[i]] = {}
+                part = part[take[i]]
             }
-            current = current[part]
-            console.log(current)
         }
     }
 }
 
 console.log(result)
 
-
-// function constructObj(obj,result={}){
-//     for(let key in obj){
-//         let take = 
+// let result = {}
+// for(let key in obj){
+//     let take = key.split(".")
+//     let current = result
+//     for(let i=0;i<take.length;i++){
+//         let part = take[i]
+//         if(i == take.length-1){
+//             current[part] = obj[key]
+//         }
+//         else{
+//             if(!current[part]){
+//                 current[part] = {}
+//             }
+//             current = current[part]
+//             console.log(current)
+//         }
 //     }
 // }
+
+// console.log(result)
