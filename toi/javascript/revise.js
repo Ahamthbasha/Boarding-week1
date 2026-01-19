@@ -739,28 +739,24 @@
 //expected output:
 // {'newObj.obj2.obj5.one':1,'obj3.obj4.two':2}
 
-
-// let result = {}
-
-// function normalizeObj(obj,prefixKey='',result={}){
-//     if(typeof obj != 'object'){
+// function destructureObj(obj,keys,result={}){
+//     if(typeof obj[keys] != 'object'){
 //         return obj
 //     }
 
 //     for(let key in obj){
-//         let constructKey = prefixKey + key+'.'
+//         let prefixKey = keys ? keys + '.' + key : ''
 //         if(typeof obj[key] == 'object'){
-//             normalizeObj(obj[key],constructKey,result)
+//             destructureObj(obj[key],prefixKey,result)
 //         }else{
-//             result[constructKey] = obj[key]
+//             result[prefixKey] = obj[key]
 //         }
 //     }
 
 //     return result
 // }
 
-// console.log(normalizeObj(obj))
-
+// console.log(destructureObj(obj))
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -782,43 +778,443 @@ let  obj = {'newObj.obj2.obj5.one':1,'obj3.obj4.two':2}
 //   },
 // };
 
-let result = {}
-
-for(let key in obj){
-    let take = key.split(".")
-    let part = result
-    for(let i=0;i<take.length;i++){
-        if(i == take.length-1){
-            part[take[i]] = obj[key]
-        }
-        else{
-            if(!part[take[i]]){
-                part[take[i]] = {}
-                part = part[take[i]]
-            }
-        }
-    }
-}
-
-console.log(result)
 
 // let result = {}
+
+
 // for(let key in obj){
-//     let take = key.split(".")
+//     let keys = key.split(".")
 //     let current = result
-//     for(let i=0;i<take.length;i++){
-//         let part = take[i]
-//         if(i == take.length-1){
+//     for(let i=0;i<keys.length;i++){
+//         let part = keys[i]
+//         if(i == keys.length-1){
 //             current[part] = obj[key]
 //         }
-//         else{
-//             if(!current[part]){
-//                 current[part] = {}
-//             }
-//             current = current[part]
-//             console.log(current)
+
+//         if(!current[part]){
+//             current[part] = {}
 //         }
+//         current = current[part]
 //     }
 // }
 
 // console.log(result)
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//incase of using object as a key it will convert the object into string behid the scence if you again an object as a key it will overwrite the value.
+
+// const a = {};
+// const b = { key: "b" };
+// const c = { key: "c" };
+
+// a[b] = 123;
+
+// console.log(a.b)
+// a[c] = 456;
+
+// console.log(a[b]); // 123
+// console.log(a[c]);
+
+// console.log(a)
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// function anagram(str1,str2){
+//     if(str1.length != str2.length){
+//         return false
+//     }
+
+//     let freqMap = {}
+
+//     for(let val of str1){
+//         if(freqMap[val]){
+//             freqMap[val]--
+//         }else{
+//             freqMap[val] = 1
+//         }
+//     }
+
+//     for(let val of str2){
+//         if(!freqMap[val]){
+//             return false
+//         }
+
+//         freqMap[val]--
+//     }
+
+//     return true
+// }
+
+// console.log(anagram('silently',"ylistenllll"))
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+// for(let i = 1;i<=3;i++){
+//     setTimeout(()=>{
+//         console.log(i)
+//     },1000)
+// }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// for(var i=1;i<=3;i++){
+//     setTimeout(()=>{
+//         console.log(i)
+//     },1000)
+// }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+// Array.prototype.myMap = function(callback){
+//     let newArr = []
+
+//     for(let i=0;i<this.length;i++){
+//         newArr.push(callback(this[i],i,this))
+//     }
+
+//     return newArr
+// }
+
+// let arr = [1,2,3,4,5]
+
+// let result = arr.myMap((val)=>val*val)
+
+// console.log(result)
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// const transactions = [
+//   { user: 'Rahul', amount: 300, date: '2025-01-20' },
+//   { user: 'Rahul', amount: 400, date: '2025-01-29' },
+//   { user: 'Meera', amount: 1500, date: '2025-01-20' },
+//   { user: 'Meera', amount: 350, date: '2025-02-10' },
+//   { user: 'Vijay', amount: 1600, date: '2025-02-14' },
+//   { user: 'Rahul', amount: 200, date: '2025-02-25' },
+//   { user: 'Rahul', amount: 2000, date: '2025-03-14' },
+//   { user: 'Meera', amount: 500, date: '2025-03-15' },
+//   { user: 'Vijay', amount: 700, date: '2025-03-12' },
+// ];
+
+//output
+// {
+//   Rahul: 2900,
+//   Meera: 2350,
+//   Vijay: 2300
+// }
+
+// Find total spending per user across all months
+
+// let result = {}
+
+// for(let val of transactions){
+//     if(result[val.user]){
+//         result[val.user] += val.amount
+//     }else{
+//         result[val.user] = val.amount
+//     }
+// }
+
+// console.log(result)
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// const transactions = [
+//   { user: 'Rahul', amount: 300, date: '2025-01-20' },
+//   { user: 'Rahul', amount: 400, date: '2025-01-29' },
+//   { user: 'Meera', amount: 1500, date: '2025-01-20' },
+//   { user: 'Meera', amount: 350, date: '2025-02-10' },
+//   { user: 'Vijay', amount: 1600, date: '2025-02-14' },
+//   { user: 'Rahul', amount: 200, date: '2025-02-25' },
+//   { user: 'Rahul', amount: 2000, date: '2025-03-14' },
+//   { user: 'Meera', amount: 500, date: '2025-03-15' },
+//   { user: 'Vijay', amount: 700, date: '2025-03-12' },
+// ];
+
+// Group transactions by month
+
+//output format
+
+// {
+//   '2025-01': [
+//     { user: 'Rahul', amount: 300, date: '2025-01-20' },
+//     { user: 'Rahul', amount: 400, date: '2025-01-29' },
+//     { user: 'Meera', amount: 1500, date: '2025-01-20' }
+//   ],
+//   '2025-02': [
+//     { user: 'Meera', amount: 350, date: '2025-02-10' },
+//     { user: 'Vijay', amount: 1600, date: '2025-02-14' },
+//     { user: 'Rahul', amount: 200, date: '2025-02-25' }
+//   ],
+//   '2025-03': [
+//     { user: 'Rahul', amount: 2000, date: '2025-03-14' },
+//     { user: 'Meera', amount: 500, date: '2025-03-15' },
+//     { user: 'Vijay', amount: 700, date: '2025-03-12' }
+//   ]
+// }
+
+// let result = {}
+// for(let val of transactions){
+//     let date = val.date.slice(0,7)
+//     if(result[date]){
+//         result[date].push(val)
+//     }else{
+//         result[date]= [val]
+//     }
+// }
+
+// console.log(result)
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// const transactions = [
+//   { user: 'Rahul', amount: 300, date: '2025-01-20' },
+//   { user: 'Rahul', amount: 400, date: '2025-01-29' },
+//   { user: 'Meera', amount: 1500, date: '2025-01-20' },
+//   { user: 'Meera', amount: 350, date: '2025-02-10' },
+//   { user: 'Vijay', amount: 1600, date: '2025-02-14' },
+//   { user: 'Rahul', amount: 200, date: '2025-02-25' },
+//   { user: 'Rahul', amount: 2000, date: '2025-03-14' },
+//   { user: 'Meera', amount: 500, date: '2025-03-15' },
+//   { user: 'Vijay', amount: 700, date: '2025-03-12' },
+// ];
+
+// Find the highest entire transaction per month
+
+//output format
+
+// {
+//   '2025-01': { user: 'Meera', amount: 1500 },
+//   '2025-02': { user: 'Vijay', amount: 1600 },
+//   '2025-03': { user: 'Rahul', amount: 2000 }
+// }
+
+// let result = {}
+
+// for(let val of transactions){
+//     let date = val.date.slice(0,7)
+//     if(result[date]){
+//         result[date].push(val)
+//     }
+//     else{
+//         result[date] = [val]
+//     }
+// }
+
+// for(let [date,users] of Object.entries(result)){
+//     let usersAmountMap = {}
+
+//     for(let val of users){
+//         if(usersAmountMap[val.user]){
+//             usersAmountMap[val.user] += val.amount
+//         }else{
+//             usersAmountMap[val.user] = val.amount
+//         }
+//     }
+
+//     let highest = -Infinity
+//     let obj = null
+//     for(let key in usersAmountMap){
+//         if(usersAmountMap[key] > highest){
+//             highest = usersAmountMap[key]
+//             obj = key
+//         }
+//     }
+
+//     let final = {}
+
+//     final.user = obj
+//     final.amount = highest
+
+//     result[date] = final
+// }
+
+// console.log(result)
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+// const transactions = [
+//   { user: 'Rahul', amount: 300, date: '2025-01-20' },
+//   { user: 'Rahul', amount: 400, date: '2025-01-29' },
+//   { user: 'Meera', amount: 1500, date: '2025-01-20' },
+//   { user: 'Meera', amount: 350, date: '2025-02-10' },
+//   { user: 'Vijay', amount: 1600, date: '2025-02-14' },
+//   { user: 'Rahul', amount: 200, date: '2025-02-25' },
+//   { user: 'Rahul', amount: 2000, date: '2025-03-14' },
+//   { user: 'Meera', amount: 500, date: '2025-03-15' },
+//   { user: 'Vijay', amount: 700, date: '2025-03-12' },
+// ];
+
+//find the highest single transaction
+
+//output format
+
+// {
+//   '2025-01': { user: 'Meera', amount: 1500, date: '2025-01-20' },
+//   '2025-02': { user: 'Vijay', amount: 1600, date: '2025-02-14' },
+//   '2025-03': { user: 'Rahul', amount: 2000, date: '2025-03-14' }
+// }
+
+// let result = {}
+
+// for(let val of transactions){
+//     let date = val.date.slice(0,7)
+    
+//     if(result[date]){
+//         result[date].push(val)
+//     }else{
+//         result[date] = [val]
+//     }
+// }
+
+// for(let [date,users] of Object.entries(result)){
+//     let highestAmount = -Infinity
+//     let obj = null
+
+//     for(let val of users){
+//         if(val.amount > highestAmount){
+//             highestAmount = val.amount
+//             obj = val
+//         }
+//     }
+
+//     result[date] = obj
+// }
+
+// console.log(result)
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// const transactions = [
+//   { user: 'Rahul', amount: 300, date: '2025-01-20' },
+//   { user: 'Rahul', amount: 400, date: '2025-01-29' },
+//   { user: 'Meera', amount: 1500, date: '2025-01-20' },
+//   { user: 'Meera', amount: 350, date: '2025-02-10' },
+//   { user: 'Vijay', amount: 1600, date: '2025-02-14' },
+//   { user: 'Rahul', amount: 200, date: '2025-02-25' },
+//   { user: 'Rahul', amount: 2000, date: '2025-03-14' },
+//   { user: 'Meera', amount: 500, date: '2025-03-15' },
+//   { user: 'Vijay', amount: 700, date: '2025-03-12' },
+// ];
+
+//count no of transactions done by each user per month
+
+// {
+//   '2025-01': { Rahul: 2, Meera: 1 },
+//   '2025-02': { Meera: 1, Vijay: 1, Rahul: 1 },
+//   '2025-03': { Rahul: 1, Meera: 1, Vijay: 1 }
+// }
+
+// let result = {}
+
+// for(let val of transactions){
+//     let date = val.date.slice(0,7)
+//     if(result[date]){
+//         result[date].push(val)
+//     }
+//     else{
+//         result[date] = [val]
+//     }
+// }
+
+// for(let [key,users] of Object.entries(result)){
+//     let temp = {}
+//     for(let val of users){
+//         if(temp[val.user]){
+//             temp[val.user]++
+//         }else{
+//             temp[val.user] = 1
+//         }
+//     }
+//     result[key] = temp
+// }
+
+// console.log(result)
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+// const transactions = [
+//   { user: 'Rahul', amount: 300, date: '2025-01-20' },
+//   { user: 'Rahul', amount: 400, date: '2025-01-29' },
+//   { user: 'Meera', amount: 1500, date: '2025-01-20' },
+//   { user: 'Meera', amount: 350, date: '2025-02-10' },
+//   { user: 'Vijay', amount: 1600, date: '2025-02-14' },
+//   { user: 'Rahul', amount: 200, date: '2025-02-25' },
+//   { user: 'Rahul', amount: 2000, date: '2025-03-14' },
+//   { user: 'Meera', amount: 500, date: '2025-03-15' },
+//   { user: 'Vijay', amount: 700, date: '2025-03-12' },
+// ];
+
+// let result = {}
+
+// for(let val of transactions){
+//     let date = val.date.slice(0,7)
+//     if(result[date]){
+//         result[date].push(val)
+//     }
+//     else{
+//         result[date] = [val]
+//     }
+// }
+
+// for(let [key,users] of Object.entries(result)){
+//     let temp = {}
+//     for(let val of users){
+//         if(temp[val.user]){
+//             temp[val.user]= {amount:temp[val.user].amount+val.amount,count:temp[val.user].count+1}
+//         }
+//         else{
+//             temp[val.user] = {amount:val.amount,count:1}
+//         }
+//     }
+
+//     result[key] = []
+//     for(let [userName,amount] of Object.entries(temp)){
+//         let averageAmount = Math.floor(amount.amount/amount.count)
+
+//         result[key].push({
+//             user:userName,
+//             avgAmount:averageAmount
+//         })
+//     }
+// }
+
+// console.log(result)
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// let str = 'a1b1c10'
+
+// let char = []
+// let charIndex = []
+// let no = []
+
+// for(let i=0;i<str.length;i++){
+//     if(/[a-zA-Z]/g.test(str[i])){
+//         char.push(str[i])
+//         charIndex.push(i)
+//     }
+// }
+
+// for(let i=0;i<charIndex.length-1;i++){
+//     no.push(str.slice(charIndex[i]+1,charIndex[i+1]))
+// }
+
+// no.push(str.slice(charIndex[charIndex.length-1]+1))
+
+
+// let result = ''
+
+// for(let i=0;i<char.length;i++){
+//     result += char[i].repeat(no[i])
+// }
+
+// console.log(result)
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
