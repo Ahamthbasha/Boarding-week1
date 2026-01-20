@@ -310,6 +310,7 @@
 //     console.log("server is running")
 // })
 
+
 //add two no from query and add in middleware update in sum.txt file
 
 // import express from "express"

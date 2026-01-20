@@ -1,0 +1,13 @@
+{
+  "scripts": {
+    "dev": "nodemon revise.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.2.1",
+    "mongodb": "^7.0.0",
+    "mongoose": "^9.1.4",
+    "nodemon": "^3.1.11"
+  },
+  "type": "module"
+}
