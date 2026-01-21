@@ -431,90 +431,92 @@
 
 // create a api which encrypt the data to written in a file and write operation only done by the admin. Create an another api which decrypts and read the content
 
-import express from "express"
-import fs from "fs"
-import crypto from "crypto"
+// import express from "express"
+// import fs from "fs"
+// import crypto from "crypto"
 
-const app = express()
+// const app = express()
 
-app.use(express.json())
+// app.use(express.json())
 
-const ALGORITH = "aes-256-cbc"
-const SECKRET_KEY = crypto.createHash('sha256').update('hex').digest()
+// const ALGORITH = "aes-256-cbc"
+// const SECKRET_KEY = crypto.createHash('sha256').update('hex').digest()
 
-function encrypt(data){
-    const iv = crypto.randomBytes(16)
+// function encrypt(data){
+//     const iv = crypto.randomBytes(16)
 
-    let cipher = crypto.createCipheriv(ALGORITH,SECKRET_KEY,iv)
+//     let cipher = crypto.createCipheriv(ALGORITH,SECKRET_KEY,iv)
 
-    let encrypted = cipher.update(data,'utf-8','hex')
-    encrypted += cipher.final('hex')
+//     let encrypted = cipher.update(data,'utf-8','hex')
+//     encrypted += cipher.final('hex')
 
-    return {
-        iv:iv.toString('hex'),
-        content:encrypted
-    }
-}
+//     return {
+//         iv:iv.toString('hex'),
+//         content:encrypted
+//     }
+// }
 
-function decrypt(encryptedData){
-    let encryptedIv = Buffer.from(encryptedData.iv,'hex')
-    let encryptedContent = encryptedData.content
+// function decrypt(encryptedData){
+//     let encryptedIv = Buffer.from(encryptedData.iv,'hex')
+//     let encryptedContent = encryptedData.content
 
-    let decipher= crypto.createDecipheriv(ALGORITH,SECKRET_KEY,encryptedIv)
-    let decrypted = decipher.update(encryptedContent,'hex','utf-8')
-    decrypted += decipher.final('utf-8')
+//     let decipher= crypto.createDecipheriv(ALGORITH,SECKRET_KEY,encryptedIv)
+//     let decrypted = decipher.update(encryptedContent,'hex','utf-8')
+//     decrypted += decipher.final('utf-8')
 
-    return decrypted
-}
+//     return decrypted
+// }
 
-const adminValidator = ((req,res,next)=>{
-    if(req.headers.role == "admin"){
-        next()
-    }else{
-        return res.status(403).json({message:"Admin only has the right to write the file"})
-    }
-})
+// const adminValidator = ((req,res,next)=>{
+//     if(req.headers.role == "admin"){
+//         next()
+//     }else{
+//         return res.status(403).json({message:"Admin only has the right to write the file"})
+//     }
+// })
 
-app.post("/writeEncrypted",adminValidator,(req,res)=>{
-    const {data} = req.body
+// app.post("/writeEncrypted",adminValidator,(req,res)=>{
+//     const {data} = req.body
 
-    if(!data){
-        res.status(400).json({message:"No data"})
-    }
+//     if(!data){
+//         res.status(400).json({message:"No data"})
+//     }
 
-    let encryptedData = JSON.stringify(encrypt(data))
+//     let encryptedData = JSON.stringify(encrypt(data))
 
-    fs.writeFile('secure.txt',encryptedData,(err)=>{
-        if(err){
-            return res.status(500).json({message:"INTERNAL SERVER ERROR"})
-        }
+//     fs.writeFile('secure.txt',encryptedData,(err)=>{
+//         if(err){
+//             return res.status(500).json({message:"INTERNAL SERVER ERROR"})
+//         }
 
-        res.status(201).json({message:"the data is encrypted successfully"})
-    })
-})
+//         res.status(201).json({message:"the data is encrypted successfully"})
+//     })
+// })
 
-app.get("/read",(req,res)=>{
-    fs.readFile('secure.txt','utf-8',(err,data)=>{
-        if(err){
-            return res.status(500).json({message:"internal server error"})
-        }
+// app.get("/read",(req,res)=>{
+//     fs.readFile('secure.txt','utf-8',(err,data)=>{
+//         if(err){
+//             return res.status(500).json({message:"internal server error"})
+//         }
 
-        try {
-         let encryptedData = JSON.parse(data)
+//         try {
+//          let encryptedData = JSON.parse(data)
         
-         let decryptedData = decrypt(encryptedData)
+//          let decryptedData = decrypt(encryptedData)
 
-         res.status(200).json({
-            message:"file decrypted readed successfully",
-            data:decryptedData
-         })
-        } catch (error) {
-            return res.status(500).json({message:"internal server error"})
-        }
-    })
-})
+//          res.status(200).json({
+//             message:"file decrypted readed successfully",
+//             data:decryptedData
+//          })
+//         } catch (error) {
+//             return res.status(500).json({message:"internal server error"})
+//         }
+//     })
+// })
 
 
-app.listen(3000,()=>{
-    console.log("server is running")
-})
+// app.listen(3000,()=>{
+//     console.log("server is running")
+// })
+
+

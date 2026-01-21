@@ -434,21 +434,97 @@
 
 //create a api which encrypt the data to written in a file and write operation only done by the admin. Create an another api which decrypts and read the content
 
+// import express from 'express'
+// import fs from 'fs'
+// import crypto from 'crypto'
+
+// const app = express()
+// app.use(express.json())
+
+// const algo = 'aes-256-cbc'
+// const key = crypto.randomBytes(32)
+
+// function encrypt(data){
+//     const iv = crypto.randomBytes(16)
+
+//     const cipher = crypto.createCipheriv(algo,key,iv)
+
+//     let encrypt = cipher.update(JSON.stringify(data),'utf-8','hex')
+//     encrypt += cipher.final('hex')
+//     return {
+//         iv:iv.toString('hex'),
+//         content:encrypt
+//     }
+// }
+
+// function decrypt(encryptedData){
+//     const decipher = crypto.createDecipheriv(algo,key,Buffer.from(encryptedData.iv,'hex'))
+//     let decryptedData = decipher.update(encryptedData.content,'hex','utf-8')
+//     decryptedData += decipher.final('utf-8')
+//     return JSON.parse(decryptedData)
+// }
+
+// const adminCheck = ((req,res,next)=>{
+//     if(req.headers.role == 'admin'){
+//         next()
+//     }
+//     else{
+//         res.status(403).json({message:"Admin has the only rights to write the file"})
+//     }
+// })
+
+// app.post('/writeFile',adminCheck,(req,res)=>{
+//     const {data} = req.body
+
+//     let encryptedData = encrypt(data)
+
+//     fs.writeFile('encrypt.txt',JSON.stringify(encryptedData),(err)=>{
+//         if(err){
+//             res.status(500).json({message:"internal server error"})
+//         }
+
+//         res.status(201).json({message:'file is updated'})
+//     })
+// })
+
+// app.get('/readFile',(req,res)=>{
+
+//     fs.readFile('encrypt.txt','utf-8',(err,data)=>{
+//         if(err){
+//             res.status(500).json({message:"internal server error"})
+//         }
+    
+//         try {
+//             let encryptedData = JSON.parse(data)
+//             let decryptedData = decrypt(encryptedData)
+//             res
+//             .status(200)
+//             .json({message:"readed file",data:decryptedData})
+//         } catch (error) {
+            
+//         }
+//     })
+
+
+// })
+
+// app.listen(3000,()=>{
+//     console.log('server is running')
+// })
+
+
+
+
 import express from 'express'
 import fs from 'fs'
 import crypto from 'crypto'
-
-const app = express()
-app.use(express.json())
 
 const algo = 'aes-256-cbc'
 const key = crypto.randomBytes(32)
 
 function encrypt(data){
     const iv = crypto.randomBytes(16)
-
     const cipher = crypto.createCipheriv(algo,key,iv)
-
     let encrypt = cipher.update(JSON.stringify(data),'utf-8','hex')
     encrypt += cipher.final('hex')
     return {
@@ -459,54 +535,60 @@ function encrypt(data){
 
 function decrypt(encryptedData){
     const decipher = crypto.createDecipheriv(algo,key,Buffer.from(encryptedData.iv,'hex'))
-    let decryptedData = decipher.update(encryptedData.content,'hex','utf-8')
-    decryptedData += decipher.final('utf-8')
-    return JSON.parse(decryptedData)
+    let decrypt = decipher.update(encryptedData.content,'hex','utf-8')
+    decrypt += decipher.final('utf-8')
+    return JSON.parse(decrypt)
 }
+
+const app = express()
+app.use(express.json())
 
 const adminCheck = ((req,res,next)=>{
     if(req.headers.role == 'admin'){
         next()
     }
     else{
-        res.status(403).json({message:"Admin has the only rights to write the file"})
+        res.status(403).json({message:"admin only write the file"})
     }
 })
 
+
 app.post('/writeFile',adminCheck,(req,res)=>{
     const {data} = req.body
+    if(!data){
+        res.status(400).json({message:'request does not have data'})
+    }
 
     let encryptedData = encrypt(data)
 
     fs.writeFile('encrypt.txt',JSON.stringify(encryptedData),(err)=>{
         if(err){
-            res.status(500).json({message:"internal server error"})
+            res.status(500).json({message:err.message})
         }
 
-        res.status(201).json({message:'file is updated'})
+        res.status(201).json({message:"file is updated"})
     })
 })
 
-app.get('/readFile',(req,res)=>{
-
+app.get("/readFile",(req,res)=>{
     fs.readFile('encrypt.txt','utf-8',(err,data)=>{
         if(err){
-            res.status(500).json({message:"internal server error"})
+            res.status(500).json({message:err.message})
         }
-    
+
         try {
-            let encryptedData = JSON.parse(data)
-            let decryptedData = decrypt(encryptedData)
-            res
-            .status(200)
-            .json({message:"readed file",data:decryptedData})
+            const decryptedData = decrypt(JSON.parse(data))
+
+            const response = decryptedData
+
+            res.status(200).json({message:"file is readed",data:response})
         } catch (error) {
-            
+            console.log(error)
+            res.status(500).json({message:error})
         }
     })
-
-
 })
+
 
 app.listen(3000,()=>{
     console.log('server is running')
