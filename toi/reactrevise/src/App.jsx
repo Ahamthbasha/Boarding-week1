@@ -10,6 +10,9 @@ import Clipboard from './Component/Clipboard'
 import Main from './Context/Main'
 import Input from './Context/Input'
 import Button from './Context/Button'
+import UseEffect from './Component/UseEffect'
+import Timer from './Component/Timer'
+import Button1 from './Component/Button1'
 
 const Lazy = lazy(()=>import('./Component/LazyComponent'))
 
@@ -27,11 +30,16 @@ const App = () => {
       {/* <Suspense fallback={<p>Loading...</p>}>
         <Lazy/>
       </Suspense> */}
-
+{/* 
       <Main>
         <Input/>
         <Button/>
-      </Main>
+      </Main> */}
+
+      {/* <UseEffect /> */}
+      {/* <Timer/> */}
+
+      <Button1 />
     </div>
   )
 }
