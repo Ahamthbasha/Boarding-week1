@@ -48,7 +48,6 @@ const Login = () => {
                 console.log(error)
             }
         }
-
         }
   return (
     <div>
