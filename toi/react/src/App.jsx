@@ -26,6 +26,7 @@ import PreventRightClick from './Logical/PreventRightClick'
 import CopyToClipboard from './Logical/CopyToClipboard'
 import DigitToWordConverter from './Logical/DigitToWordConverter'
 import Todo from './Logical/Todo'
+import Table from './Component/Table'
 
 const Lazy = lazy(()=>import('./Component/LazyComponent'))
 
@@ -61,7 +62,8 @@ const App = () => {
       {/* <PreventRightClick/> */}
       {/* <CopyToClipboard /> */}
       {/* <DigitToWordConverter/> */}
-      <Todo/>
+      {/* <Todo/> */}
+      <Table />
     </div>
   )
 }
