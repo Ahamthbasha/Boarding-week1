@@ -3,6 +3,7 @@ import CakeIce from './component/CakeIce'
 import UserList from './component/UserList'
 import Rice from './component/Rice'
 import Pongal from './component/Pongal'
+import Counter from './component/Counter'
 
 const App = () => {
   return (
@@ -10,7 +11,8 @@ const App = () => {
       {/* <CakeIce/> */}
       {/* <UserList /> */}
       {/* <Rice /> */}
-      <Pongal isRice/>
+      {/* <Pongal isRice/> */}
+      <Counter />
     </div>
   )
 }
