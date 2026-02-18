@@ -207,16 +207,22 @@ import fs, { read } from 'fs'
 
 // server
 
-import express from 'express'
+// import express from 'express'
 
-const app = express()
+// const app = express()
 
-app.get('/add',(req,res)=>{
-    const {a,b} = req.query
-    const sum = Number(a) + Number(b)
-    res.status(200).json({message:"added",data:sum})
-})
+// app.get('/add',(req,res)=>{
+//     const {a,b} = req.query
+//     const sum = Number(a) + Number(b)
+//     res.status(200).json({message:"added",data:sum})
+// })
 
-app.listen(3000,()=>{
-    console.log("server is running")
-})
+// app.listen(3000,()=>{
+//     console.log("server is running")
+// })
+
+// folder
+
+// fs.readdir('txt',(err,files)=>{
+//     console.log(files)
+// })
