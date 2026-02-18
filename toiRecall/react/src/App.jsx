@@ -22,6 +22,8 @@ import Logic2 from './Logical/Logic2'
 import Logic3 from './Logical/Logic3'
 import Logic4 from './Logical/Logic4'
 import Todo from './Logical/Todo'
+import ConvertNumToWords from './Logical/ConvertNumToWords'
+import TableData from './Logical/TableData'
 
 const Lazy = lazy(()=>import('./Component/LazyComponent'))
 
@@ -58,8 +60,9 @@ const App = () => {
       {/* <Logic3 /> */}
       {/* <Logic4/> */}
       {/* <Todo/> */}
+      {/* <ConvertNumToWords/> */}
 
-      
+      <TableData />
     </div>
   )
 }
