@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from 'react'
+import React, {  Suspense } from 'react'
 import Usestate from './Component/Usestate'
 import UseEffect from './Component/UseEffect'
 import UseRef from './Component/UseRef'
@@ -25,7 +25,7 @@ import Todo from './Logical/Todo'
 import ConvertNumToWords from './Logical/ConvertNumToWords'
 import TableData from './Logical/TableData'
 
-const Lazy = lazy(()=>import('./Component/LazyComponent'))
+// const Lazy = lazy(()=>import('./Component/LazyComponent'))
 
 const App = () => {
   return (
@@ -59,10 +59,10 @@ const App = () => {
       {/* <Logic2/> */}
       {/* <Logic3 /> */}
       {/* <Logic4/> */}
-      {/* <Todo/> */}
+      <Todo/>
       {/* <ConvertNumToWords/> */}
 
-      <TableData />
+      {/* <TableData /> */}
     </div>
   )
 }
