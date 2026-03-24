@@ -1,0 +1,52 @@
+<!-- event bubbling -->
+<!-- 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="parent">
+        <button id="child">click</button>
+    </div>
+
+    <script>
+        document.getElementById('parent').addEventListener('click',(e)=>{
+            alert(`parent ${e.target.tagName}`)
+        })
+
+        document.getElementById('child').addEventListener('click',(e)=>{
+            alert(`child ${e.target.tagName}`)
+        })
+    </script>
+</body>
+</html> -->
+
+<!-- event capturing -->
+
+<!-- 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="parent">
+        <button id="child">click</button>
+    </div>
+
+    <script>
+        document.getElementById('parent').addEventListener('click',(e)=>{
+            alert(`parent ${e.target.tagName}`)
+        },true)
+
+        document.getElementById('child').addEventListener('click',(e)=>{
+            alert(`child ${e.target.tagName}`)
+        })
+    </script>
+</body>
+</html> -->
