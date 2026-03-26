@@ -1,11 +1,11 @@
 import React from 'react'
 
-const HOCCOMPONENT = (WrappedComponent)=>{
+const HocComponent = (WrappedComponent)=>{
     return function(props){
         return(
-        <div style={{border:'2px solid blue'}}>
-            <WrappedComponent {...props}/>
-        </div>
+            <div style={{border:"2px solid blue"}}>
+                <WrappedComponent {...props}/>
+            </div>
         )
     }
 }
@@ -13,10 +13,11 @@ const HOCCOMPONENT = (WrappedComponent)=>{
 const Button = ()=>{
     return(
         <div>
-            <button>click</button>
+            <button>Click</button>
         </div>
     )
 }
 
-const HOC = HOCCOMPONENT(Button)
+const HOC = HocComponent(Button)
+
 export default HOC
