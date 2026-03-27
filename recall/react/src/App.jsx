@@ -78,6 +78,7 @@ import ConditionalRender from './component/ConditionalRender'
 import Logic1 from './component/Logic1'
 import Logic2 from './component/Logic2'
 import Logic3 from './component/Logic3'
+import Todo from './component/Todo'
 
 const App = () => {
   return (
@@ -96,7 +97,8 @@ const App = () => {
       {/* <ConditionalRender/> */}
       {/* <Logic1/> */}
       {/* <Logic2/> */}
-      <Logic3/>
+      {/* <Logic3/> */}
+      <Todo />
     </div>
   )
 }
