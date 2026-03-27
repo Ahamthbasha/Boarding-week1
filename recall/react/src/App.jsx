@@ -79,6 +79,7 @@ import Logic1 from './component/Logic1'
 import Logic2 from './component/Logic2'
 import Logic3 from './component/Logic3'
 import Todo from './component/Todo'
+import Copy from './component/Copy'
 
 const App = () => {
   return (
@@ -98,7 +99,8 @@ const App = () => {
       {/* <Logic1/> */}
       {/* <Logic2/> */}
       {/* <Logic3/> */}
-      <Todo />
+      {/* <Todo /> */}
+      <Copy/>
     </div>
   )
 }
