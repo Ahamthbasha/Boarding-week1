@@ -30,7 +30,9 @@ const OptimizedSearch = () => {
                     setUser(result)
                 setLoading(false)
             } catch (error) {
-                if(error.name == 'AbortError')
+                if(error.name == 'AbortError'){
+                    return
+                }
                 setLoading(false)
                 setError(error.message)    
             }
