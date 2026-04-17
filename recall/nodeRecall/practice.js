@@ -1,11 +1,19 @@
-import express from 'express'
+//write a file
 
-const app = express()
+import fs from 'fs'
 
-app.get('/',(req,res)=>{
-    res.send("hello basha")
-})
+// fs.writeFile('youth.txt','superbfilm',(err)=>{
+//     if(err){
+//         console.log(err)
+//     }
 
-app.listen(3000,()=>{
-    console.log('server is running')
+//     console.log('writed')
+// })
+
+fs.readFile('youth.txt','utf-8',(err,data)=>{
+    if(err){
+        console.log(err)
+    }
+
+    console.log(data)
 })
