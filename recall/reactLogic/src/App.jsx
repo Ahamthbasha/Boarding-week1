@@ -3,6 +3,7 @@ import Search from './component/Search'
 import Debounce from './component/Debounce'
 import ToggleListSelection from './component/ToggleListSelection'
 import CounterWithUndo from './component/CounterWithUndo'
+import DerivedState from './component/DerivedState'
 
 const App = () => {
   return (
@@ -10,7 +11,9 @@ const App = () => {
       {/* <Search/> */}
       {/* <Debounce/> */}
       {/* <ToggleListSelection /> */}
-      <CounterWithUndo/>
+      {/* <CounterWithUndo/> */}
+      <DerivedState/>
+
     </div>
   )
 }
