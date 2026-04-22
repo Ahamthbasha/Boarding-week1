@@ -58,6 +58,24 @@
 
 import fs from 'fs'
 
+//write stream
+
+// const writableStream = fs.createWriteStream('youth.txt')
+
+// writableStream.write("hello youth")
+
+// writableStream.end("\n writed")
+
+// writableStream.on('finish',()=>{
+//     console.log("writing completed")
+// })
+
+// writableStream.on('error',(err)=>{
+//     console.log(err)
+// })
+
+//read Stream
+
 // const readableStream = fs.createReadStream('youth.txt')
 
 // readableStream.on('data',(chunk)=>{
@@ -65,30 +83,14 @@ import fs from 'fs'
 // })
 
 // readableStream.on('end',()=>{
-//     console.log('reading finished')
+//     console.log('reading ended')
 // })
 
 // readableStream.on('error',(err)=>{
 //     console.log(err)
 // })
 
-// writable stream
-
-// const writableStream = fs.createWriteStream('ken.txt')
-
-// writableStream.write("youth is good entertaining film")
-
-// writableStream.end("\n youth")
-
-// writableStream.on('finish',()=>{
-//     console.log("writing completed")
-// })
-
-// writableStream.on('error',(err)=>{
-//     console.log('err',err)
-// })
-
-//duples stream
+//duplex
 
 // import { Duplex } from 'stream'
 
@@ -99,7 +101,7 @@ import fs from 'fs'
 //     }
 
 //     _write(chunk,encoding,callback){
-//         this.data +=chunk.toString() 
+//         this.data += chunk.toString()
 //         callback()
 //     }
 
@@ -111,19 +113,13 @@ import fs from 'fs'
 
 // const d = new MyDuplex()
 
-// d.read('data',(chunk)=>{
+// d.write("hello basha")
+
+// d.on('data',(chunk)=>{
 //     console.log(chunk.toString())
 // })
 
-// d.write("hello everybody")
-
-// d.read('data',(chunk)=>{
-//     console.log(chunk.toString())
-// })
-
-// d.end()
-
-// transform stream
+//transform
 
 import { Transform } from 'stream'
 
@@ -135,11 +131,12 @@ class MyTransform extends Transform{
     }
 }
 
-const readable = fs.createReadStream('ken.txt')
-const writable = fs.createWriteStream('KEN2.TXT')
+const w = fs.createWriteStream('Upper.txt')
+const r = fs.createReadStream('youth.txt')
 
 const t = new MyTransform()
 
-
-
-readable.pipe(t).pipe(writable)
+r.pipe(t).pipe(w)
+.on('finish',()=>{
+    console.log("finished")
+})
