@@ -14,7 +14,6 @@ const quantityIncrement = ()=>{
 
   return (
     <div>
-
         <h1>Price is : {price}</h1>
         <h1>Quantity is : {quantity}</h1>
         <h1>TotalPrice:{price * quantity}</h1>
