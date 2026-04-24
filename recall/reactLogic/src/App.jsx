@@ -5,6 +5,7 @@ import ToggleListSelection from './component/ToggleListSelection'
 import CounterWithUndo from './component/CounterWithUndo'
 import DerivedState from './component/DerivedState'
 import SearchFilterPagination from './component/SearchFilterPagination'
+import Cart from './component/Cart'
 
 const App = () => {
   return (
@@ -14,7 +15,8 @@ const App = () => {
       {/* <ToggleListSelection /> */}
       {/* <CounterWithUndo/> */}
       {/* <DerivedState/> */}
-      <SearchFilterPagination />
+      {/* <SearchFilterPagination /> */}
+      <Cart />
     </div>
   )
 }
