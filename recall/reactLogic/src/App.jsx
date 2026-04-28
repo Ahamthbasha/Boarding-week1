@@ -7,6 +7,7 @@ import DerivedState from './component/DerivedState'
 import SearchFilterPagination from './component/SearchFilterPagination'
 import Cart from './component/Cart'
 import ShoppingCart from './component/ShoppingCart'
+import UndoRedo from './component/UndoRedo'
 
 const App = () => {
   return (
@@ -18,7 +19,8 @@ const App = () => {
       {/* <DerivedState/> */}
       {/* <SearchFilterPagination /> */}
       {/* <Cart /> */}
-      <ShoppingCart/>
+      {/* <ShoppingCart/> */}
+      <UndoRedo/>
     </div>
   )
 }
